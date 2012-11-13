@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="app_name">ViSH mobile</string>
+
+    <!-- BUTTONS -->
+    <string name="button_ok">OK</string>
+    
+    
+    <!-- GENERAL MESSAGES -->
+    <string name="loading">Loading&#8230;</string>
+    <string name="login_error_title">Bad credentials</string>
+    <string name="login_error_text">Your username or password are incorrect. Please, try again.</string>
+    
+    
+    <!-- LOGIN -->
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    
+    
+    <!-- MAIN -->
+    <string name="instructions">If you want to upload a media resource to ViSH simply take a new photo/video or select one from your gallery.</string>
+    <string name="capture_image">Capture image</string>
+    <string name="capture_video">Capture video</string>
+    <string name="gallery">Select from gallery</string>
+    
+</resources>
