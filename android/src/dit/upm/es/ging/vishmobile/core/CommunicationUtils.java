@@ -78,7 +78,7 @@ public class CommunicationUtils {
 		String authString = username + ":" + password;
         // On Android, the default charset is UTF-8.
 		// NO_WRAP means that the Base64 encoder uses a flag bit to omit all line terminators (i.e., the output will be on one long line)
-		// It's necessary to work in Android versions below 4.0.
+		// It's necessary to work in Android versions below 4.0
         String basicAuth = "basic " + new String(Base64.encode(authString.getBytes(), Base64.NO_WRAP));
         
         return basicAuth;
