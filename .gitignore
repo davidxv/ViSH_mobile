@@ -1,3 +1,3 @@
-/gen
-/bin
-project.properties
+/android/gen
+/android/bin
+/android/:project.properties
