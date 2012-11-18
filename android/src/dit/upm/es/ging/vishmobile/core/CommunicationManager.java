@@ -14,6 +14,7 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Base64;
 import android.util.Log;
 
 
@@ -64,15 +65,10 @@ public class CommunicationManager {
 		
 		if (authenticationToken.length() == 0) {
 			// TODO Add better control of Base64 Encoding exception
-			response = new ServerResponse();
-			response.setResponseCode(500);
+			return null;
 		} else {
-			String uri = Constants.SERVER_URI + Constants.LOGIN_PATH;
+			String uri = Constants.SERVER_URI + Constants.USER_INFO_PATH;
 			response = getRequestAuthorizationBasic(uri, authenticationToken);
-			if(response.getResponseCode()==200){
-				//Get user info
-				response = getRequestAuthorizationBasic(Constants.SERVER_URI + Constants.USER_INFO_PATH,authenticationToken);
-			}
 		}
 		return response;
 	}
@@ -129,8 +125,11 @@ public class CommunicationManager {
 	        getConnection.setDoInput(true);
 	        getConnection.setRequestMethod("GET");
 	        
-	        // Authorization header
-	        getConnection.setRequestProperty("Authorization", authenticationToken);
+//	        // Authorization header
+//	        String authString = "user:password";
+//	        authenticationToken = "basic " + Base64.encodeToString(authString.getBytes(), Base64.NO_WRAP);
+//	        Log.i("authenticationToken",authenticationToken);
+//	        getConnection.setRequestProperty("Authorization", authenticationToken);
 
 	        // Starts the query
 	        getConnection.connect();
@@ -143,7 +142,6 @@ public class CommunicationManager {
 	        InputStream inStream = new BufferedInputStream(getConnection.getInputStream());
 	        String responseText = CommunicationUtils.readStream(inStream);
 	        Log.i("getResquestAuthorizationBasic Response:",responseText);
-	        
 	        Log.e("Content Type", getConnection.getContentType());
 	        
 	        String contentType = CommunicationUtils.getContentType(getConnection.getContentType());
@@ -166,9 +164,8 @@ public class CommunicationManager {
 			if (e.getMessage().contains("authentication challenge")) {
 				//401: Unauthorized
 				response.setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED);
-			} else {
-				e.printStackTrace();
 			}
+			e.printStackTrace();
 		}
 		return response;
 	}

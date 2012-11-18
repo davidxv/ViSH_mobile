@@ -84,7 +84,6 @@ public class LoginActivity extends Activity {
     	protected ServerResponse doInBackground(String... params) {
 			authenticationToken = params[0];
 			ServerResponse result = CommunicationManager.getInstance().checkAuthenticationTokenValidity(authenticationToken);
-			
 			return result;
 		}
     	
