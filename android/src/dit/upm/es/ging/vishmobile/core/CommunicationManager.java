@@ -29,7 +29,7 @@ public class CommunicationManager {
 	/**
 	 * Protected constructor avoids common instantiation from other packages
 	 */
-	protected CommunicationManager() {
+	private CommunicationManager() {
 			
 	}
 	
@@ -62,18 +62,18 @@ public class CommunicationManager {
 	public ServerResponse checkAuthenticationTokenValidity(String authenticationToken) {
 		ServerResponse response;
 		
-		if (authenticationToken.length() == 0)
-		{
+		if (authenticationToken.length() == 0) {
 			// TODO Add better control of Base64 Encoding exception
 			response = new ServerResponse();
 			response.setResponseCode(500);
+		} else {
+			String uri = Constants.SERVER_URI + Constants.LOGIN_PATH;
+			response = getRequestAuthorizationBasic(uri, authenticationToken);
+			if(response.getResponseCode()==200){
+				//Get user info
+				response = getRequestAuthorizationBasic(Constants.SERVER_URI + Constants.USER_INFO_PATH,authenticationToken);
+			}
 		}
-		else
-		{
-			String uri = Constants.API_URI + "home";
-			response = getResquestAuthorizationBasic(uri, authenticationToken);
-		}
-		
 		return response;
 	}
 	
@@ -85,7 +85,7 @@ public class CommunicationManager {
 	 * @return
 	 */
 	public ServerResponse uploadDocument(String file, String title, String description) {
-		String uri = Constants.API_URI + "/documents.json";
+		String uri = Constants.SERVER_URI + "/documents.json";
 		String body = "";
 		ServerResponse result = postRequest(uri, body);
 		return result;
@@ -106,8 +106,8 @@ public class CommunicationManager {
 	 * @param uri
 	 * @return
 	 */
-	private ServerResponse getResquest(String uri) {
-		return this.getResquestAuthorizationBasic(uri, Model.getAuthenticationToken());
+	private ServerResponse getRequest(String uri) {
+		return this.getRequestAuthorizationBasic(uri, Model.getAuthenticationToken());
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class CommunicationManager {
 	 * @param authenticationToken
 	 * @return
 	 */
-	private ServerResponse getResquestAuthorizationBasic(String uri, String authenticationToken) {
+	private ServerResponse getRequestAuthorizationBasic(String uri, String authenticationToken) {
 		
 		// the string to store the response text from the server
         ServerResponse response = new ServerResponse();
@@ -138,19 +138,37 @@ public class CommunicationManager {
 	        Log.i("GET request: ", uri);
 	        
 	        int responseCode = getConnection.getResponseCode();
-	        InputStream inStream = new BufferedInputStream(getConnection.getInputStream());
-	        
 	        response.setResponseCode(responseCode);
 	        
-	        // close getConnectionections
+	        InputStream inStream = new BufferedInputStream(getConnection.getInputStream());
+	        String responseText = CommunicationUtils.readStream(inStream);
+	        Log.i("getResquestAuthorizationBasic Response:",responseText);
+	        
+	        Log.e("Content Type", getConnection.getContentType());
+	        
+	        String contentType = CommunicationUtils.getContentType(getConnection.getContentType());
+	        if(contentType.equals("json")){
+	        	try {
+	        		response.setResponseResult(new JSONObject(responseText));
+	        	} catch (JSONException e){
+	        		e.printStackTrace();
+	        	}
+	        } else if(contentType.equals("text/html")){
+	        	//TODO...
+	        }
+	       
+	        // close getConnections
 	        inStream.close();
 	        getConnection.disconnect();
-		}
-		catch(MalformedURLException e) {
+		} catch(MalformedURLException e) {
 			e.printStackTrace();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
+		} catch(IOException e) {
+			if (e.getMessage().contains("authentication challenge")) {
+				//401: Unauthorized
+				response.setResponseCode(HttpURLConnection.HTTP_UNAUTHORIZED);
+			} else {
+				e.printStackTrace();
+			}
 		}
 		return response;
 	}
@@ -208,7 +226,6 @@ public class CommunicationManager {
 	        int responseCode = postConnection.getResponseCode();
 	        InputStream inStream = new BufferedInputStream(postConnection.getInputStream());
 	        String json = CommunicationUtils.readStream(inStream);
-	        
 	        response = new ServerResponse(responseCode, new JSONObject(json));
 	        
 	        // close connections

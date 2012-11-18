@@ -8,7 +8,7 @@ package dit.upm.es.ging.vishmobile.core;
  *
  */
 public class Constants {
-
-	// Server
-	public static final String API_URI = "http://vishub-test.global.dit.upm.es/";
+	public static final String SERVER_URI = "http://vishub-test.global.dit.upm.es/";
+	public static final String LOGIN_PATH = "users/sign_in";
+	public static final String USER_INFO_PATH = "home.json";
 }

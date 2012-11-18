@@ -13,6 +13,7 @@ import dit.upm.es.ging.vishmobile.core.ServerResponse;
 import dit.upm.es.ging.vishmobile.utils.UIutils;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,8 +57,7 @@ public class LoginActivity extends Activity {
 				String authToken = "";
 				try {
 					authToken = CommunicationUtils.generateAuthenticationTokenFromUserPassword(username, password);
-				}
-				catch (UnsupportedEncodingException e) {
+				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
 				// execute the login process
@@ -84,21 +84,24 @@ public class LoginActivity extends Activity {
     	protected ServerResponse doInBackground(String... params) {
 			authenticationToken = params[0];
 			ServerResponse result = CommunicationManager.getInstance().checkAuthenticationTokenValidity(authenticationToken);
+			
 			return result;
 		}
     	
     	protected void onPostExecute(ServerResponse response) {
     		// hide progress dialog
     		this.progressDialog.hide();
-    		// check result
+
+    		Log.i("ServerResponse with responseCode", Integer.toString(response.getResponseCode()));
+    		
+//    		// check result
     		if(response.getResponseCode() == 200) {
     			// save authorization token in the model
     			Model.setAuthenticationToken(authenticationToken);
     			// go to the main activity
     			Intent i = new Intent(LoginActivity.this, MainActivity.class);
     			startActivity(i);
-    		}
-    		else {
+    		} else {
     			// Inform the user about the problem
     			UIutils.showDialogToUser(LoginActivity.this, getString(R.string.login_error_title), getString(R.string.login_error_text));
     		}

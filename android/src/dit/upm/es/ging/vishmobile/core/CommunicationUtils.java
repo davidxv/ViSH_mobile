@@ -32,8 +32,7 @@ public class CommunicationUtils {
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			return true;
-		} 
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -52,8 +51,7 @@ public class CommunicationUtils {
 			while ((line = r.readLine()) != null) {
 			    total.append(line);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return total.toString();
@@ -82,6 +80,20 @@ public class CommunicationUtils {
         String basicAuth = "basic " + new String(Base64.encode(authString.getBytes(), Base64.NO_WRAP));
         
         return basicAuth;
+	}
+	
+	
+	
+	/**
+	 * Returns a specific content type (HTML,JSON,...) of a server response
+	 * @param contentType The MIME Type of the content specified by the response header field content
+	 * @return specific content type
+	 */
+	public static String getContentType(String contentType){
+		if(contentType.contains("text/html")){
+			return "text/html";
+		}
+		return "unknown";
 	}
 
 }
