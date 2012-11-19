@@ -5,17 +5,20 @@ package dit.upm.es.ging.vishmobile.activities;
 
 import dit.upm.es.ging.vishmobile.R;
 import dit.upm.es.ging.vishmobile.camera.CameraFileManager;
+import dit.upm.es.ging.vishmobile.core.Model;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 /**
  * @author Daniel Gallego Vico
+ * @author Aldo Gordillo Méndez
  *
  */
 public class MainActivity extends Activity {
@@ -30,6 +33,20 @@ public class MainActivity extends Activity {
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
+	        
+	        Model.init(this);
+	        
+	        if(Model.getAuthenticationToken()==null){
+	        	//Go to login activity
+	        	Intent i = new Intent(MainActivity.this, LoginActivity.class);
+    			startActivity(i);
+    			this.finish();
+	        } else {
+	        	//Stored credentials
+    			Log.i("AuthToken",Model.getAuthenticationToken());
+    			Log.i("Username",Model.getUserName());
+	        }
+	        
 	        setContentView(R.layout.activity_main);
 	        
 	        // Capture image button

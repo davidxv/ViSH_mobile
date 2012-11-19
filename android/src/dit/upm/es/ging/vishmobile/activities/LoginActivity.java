@@ -55,17 +55,17 @@ public class LoginActivity extends Activity {
 			public void onClick(View v) {
 				// TODO validate username and password
 				
-				// generate authentication token
+				// Generate authentication token
 				String username = mUsernameText.getText().toString();
 				String password = mPasswordText.getText().toString();
 				String authToken = "";
 				try {
 					authToken = CommunicationUtils.generateAuthenticationTokenFromUserPassword(username, password);
+					// execute the login process
+					new LoginTask().execute(authToken);
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
-				// execute the login process
-				new LoginTask().execute(authToken);
 			}
 		});
     }
@@ -92,21 +92,24 @@ public class LoginActivity extends Activity {
 		}
     	
     	protected void onPostExecute(ServerResponse response) {
-    		this.progressDialog.hide();
-
+    		this.progressDialog.dismiss();
+    		
     		if((response!=null)&&(response.getResponseCode() == HttpURLConnection.HTTP_OK)) {
     			// Save authorization token in the model
-    			Model.setAuthenticationToken(authenticationToken);
+    			Model.setAuthenticationToken(LoginActivity.this,authenticationToken);
     			try {
-    				Log.i("User name vale ", response.getResponseResult().get("name").toString());
-    				Model.setUserName(response.getResponseResult().get("name").toString());
+    				Model.setUserName(LoginActivity.this,response.getResponseResult().get("name").toString());
     			} catch (JSONException e){
     				e.printStackTrace();
     			}
     			
+//    			Log.i("AuthToken",Model.getAuthenticationToken(LoginActivity.this));
+//    			Log.i("Username",Model.getUserName(LoginActivity.this));
+    			
     			// Go to the main activity
     			Intent i = new Intent(LoginActivity.this, MainActivity.class);
     			startActivity(i);
+    			LoginActivity.this.finish();
     		} else {
     			// Inform the user about the problem
     			UIutils.showDialogToUser(LoginActivity.this, getString(R.string.login_error_title), getString(R.string.login_error_text));
