@@ -4,6 +4,9 @@
 package dit.upm.es.ging.vishmobile.activities;
 
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+
+import org.json.JSONException;
 
 import dit.upm.es.ging.vishmobile.R;
 import dit.upm.es.ging.vishmobile.core.CommunicationManager;
@@ -24,6 +27,7 @@ import android.content.Intent;
 
 /**
  * @author Daniel Gallego Vico
+ * @author Aldo Gordillo Méndez
  *
  */
 public class LoginActivity extends Activity {
@@ -88,16 +92,19 @@ public class LoginActivity extends Activity {
 		}
     	
     	protected void onPostExecute(ServerResponse response) {
-    		// hide progress dialog
     		this.progressDialog.hide();
 
-    		Log.i("ServerResponse with responseCode", Integer.toString(response.getResponseCode()));
-    		
-//    		// check result
-    		if(response.getResponseCode() == 200) {
-    			// save authorization token in the model
+    		if((response!=null)&&(response.getResponseCode() == HttpURLConnection.HTTP_OK)) {
+    			// Save authorization token in the model
     			Model.setAuthenticationToken(authenticationToken);
-    			// go to the main activity
+    			try {
+    				Log.i("User name vale ", response.getResponseResult().get("name").toString());
+    				Model.setUserName(response.getResponseResult().get("name").toString());
+    			} catch (JSONException e){
+    				e.printStackTrace();
+    			}
+    			
+    			// Go to the main activity
     			Intent i = new Intent(LoginActivity.this, MainActivity.class);
     			startActivity(i);
     		} else {
@@ -107,5 +114,4 @@ public class LoginActivity extends Activity {
     	}
     	
     }
-
 }

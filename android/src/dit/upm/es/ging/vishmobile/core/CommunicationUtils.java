@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -17,6 +18,7 @@ import android.util.Base64;
 
 /**
  * @author Daniel Gallego Vico
+ * @author Aldo Gordillo Méndez
  *
  */
 public class CommunicationUtils {
@@ -77,7 +79,7 @@ public class CommunicationUtils {
         // On Android, the default charset is UTF-8.
 		// NO_WRAP means that the Base64 encoder uses a flag bit to omit all line terminators (i.e., the output will be on one long line)
 		// It's necessary to work in Android versions below 4.0
-        return "basic " + new String(Base64.encode(authString.getBytes(), Base64.NO_WRAP));
+        return "Basic " + new String(Base64.encode(authString.getBytes(), Base64.NO_WRAP));
 	}
 	
 	
@@ -89,9 +91,24 @@ public class CommunicationUtils {
 	 */
 	public static String getContentType(String contentType){
 		if(contentType.contains("text/html")){
-			return "text/html";
+			return Constants.FORMAT_HTML;
+		} else if(contentType.contains("application/json")){
+			return Constants.FORMAT_JSON;
 		}
-		return "unknown";
+		return Constants.FORMAT_UNKNOWN;
+	}
+	
+	/**
+	 * Returns if a HTTP response code is an HTTP error code (4xx or 5xx).
+	 * @param responseCode
+	 * @return
+	 */
+	public static boolean isErrorResponseCode(int responseCode){
+		 //TODO Apply regex to detect if responseCode starts with 4 or 5
+		if(responseCode==HttpURLConnection.HTTP_UNAUTHORIZED){
+			return true;
+		}
+		return false;
 	}
 
 }

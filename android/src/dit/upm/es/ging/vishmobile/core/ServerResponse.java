@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 /**
  * @author Daniel Gallego Vico
+ * @author Aldo Gordillo Méndez
  *
  */
 public class ServerResponse {

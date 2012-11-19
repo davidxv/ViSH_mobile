@@ -14,12 +14,10 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Base64;
-import android.util.Log;
-
 
 /**
  * @author Daniel Gallego Vico
+ * @author Aldo Gordillo Méndez
  *
  */
 public class CommunicationManager {
@@ -63,7 +61,7 @@ public class CommunicationManager {
 	public ServerResponse checkAuthenticationTokenValidity(String authenticationToken) {
 		ServerResponse response;
 		
-		if (authenticationToken.length() == 0) {
+		if (authenticationToken == null) {
 			// TODO Add better control of Base64 Encoding exception
 			return null;
 		} else {
@@ -124,39 +122,39 @@ public class CommunicationManager {
 	        HttpURLConnection getConnection = (HttpURLConnection) url.openConnection();
 	        getConnection.setDoInput(true);
 	        getConnection.setRequestMethod("GET");
-	        
-//	        // Authorization header
-//	        String authString = "user:password";
-//	        authenticationToken = "basic " + Base64.encodeToString(authString.getBytes(), Base64.NO_WRAP);
-//	        Log.i("authenticationToken",authenticationToken);
-//	        getConnection.setRequestProperty("Authorization", authenticationToken);
+	        getConnection.setRequestProperty("Authorization", authenticationToken);
 
 	        // Starts the query
 	        getConnection.connect();
 	        
-	        Log.i("GET request: ", uri);
+//	        Log.i("GET request: ", uri);
 	        
 	        int responseCode = getConnection.getResponseCode();
 	        response.setResponseCode(responseCode);
 	        
-	        InputStream inStream = new BufferedInputStream(getConnection.getInputStream());
-	        String responseText = CommunicationUtils.readStream(inStream);
-	        Log.i("getResquestAuthorizationBasic Response:",responseText);
-	        Log.e("Content Type", getConnection.getContentType());
+	        InputStream inStream;
+	        if(CommunicationUtils.isErrorResponseCode(responseCode)){
+	        	inStream = getConnection.getErrorStream();
+	        } else {
+	        	inStream = getConnection.getInputStream();
+	        }
+  
+	        InputStream inBufStream = new BufferedInputStream(inStream);
+	        String responseText = CommunicationUtils.readStream(inBufStream);
+	        inStream.close();
 	        
 	        String contentType = CommunicationUtils.getContentType(getConnection.getContentType());
-	        if(contentType.equals("json")){
+	        if(contentType.equals(Constants.FORMAT_JSON)){
 	        	try {
 	        		response.setResponseResult(new JSONObject(responseText));
 	        	} catch (JSONException e){
 	        		e.printStackTrace();
 	        	}
-	        } else if(contentType.equals("text/html")){
+	        } else if(contentType.equals(Constants.FORMAT_HTML)){
 	        	//TODO...
 	        }
 	       
-	        // close getConnections
-	        inStream.close();
+	        // Close getConnections
 	        getConnection.disconnect();
 		} catch(MalformedURLException e) {
 			e.printStackTrace();
