@@ -46,10 +46,13 @@
             <objects>
                 <viewController id="YEp-Nb-Ipi" customClass="StartViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kkz-Rv-5se">
-                        <rect key="frame" x="0.0" y="64" width="568" height="256"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wML-8j-2Nl">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="EVB-kp-R5k"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Seleccionar y subir pelicula">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,6 +66,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bdd-L9-cgl">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="GmL-lf-Auf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Grabar nueva película">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -75,18 +81,22 @@
                                     <segue destination="2" kind="push" identifier="Show Movie Record" id="bnU-Uh-OrU"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.50000000000000011" contentMode="scaleToFill" image="vish.png" translatesAutoresizingMaskIntoConstraints="NO" id="C1o-oa-ARe"/>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.74509805439999999" green="0.99607849120000003" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="bdd-L9-cgl" firstAttribute="top" secondItem="Kkz-Rv-5se" secondAttribute="top" constant="56" id="BLi-nj-yPX"/>
-                            <constraint firstItem="wML-8j-2Nl" firstAttribute="centerX" secondItem="Kkz-Rv-5se" secondAttribute="centerX" type="default" id="TJJ-mI-Hk0"/>
-                            <constraint firstAttribute="bottom" secondItem="wML-8j-2Nl" secondAttribute="bottom" constant="78" id="XCm-DO-gKP"/>
+                            <constraint firstItem="C1o-oa-ARe" firstAttribute="leading" secondItem="Kkz-Rv-5se" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="B3n-zE-ZCQ"/>
+                            <constraint firstAttribute="trailing" secondItem="C1o-oa-ARe" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="CxF-SF-bvK"/>
+                            <constraint firstItem="C1o-oa-ARe" firstAttribute="centerX" secondItem="wML-8j-2Nl" secondAttribute="centerX" type="default" id="K6C-kM-2P1"/>
+                            <constraint firstItem="bdd-L9-cgl" firstAttribute="top" secondItem="Kkz-Rv-5se" secondAttribute="top" constant="20" symbolic="YES" type="user" id="PVg-lJ-kQJ"/>
+                            <constraint firstItem="C1o-oa-ARe" firstAttribute="top" relation="lessThanOrEqual" secondItem="wML-8j-2Nl" secondAttribute="bottom" constant="150" type="user" id="Px2-pE-mjY"/>
+                            <constraint firstAttribute="bottom" secondItem="C1o-oa-ARe" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="bt9-6S-uxG"/>
+                            <constraint firstItem="wML-8j-2Nl" firstAttribute="top" secondItem="bdd-L9-cgl" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="c67-e3-01g"/>
                             <constraint firstItem="bdd-L9-cgl" firstAttribute="centerX" secondItem="wML-8j-2Nl" secondAttribute="centerX" type="default" id="jHj-tE-JSX"/>
+                            <constraint firstItem="C1o-oa-ARe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="wML-8j-2Nl" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="l6V-s4-601"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" title="ViSH" id="SeA-oj-2Qq"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="ovb-vV-sRt" kind="push" identifier="Show Form" id="0Tf-F8-dJp"/>
                     </connections>
@@ -100,51 +110,54 @@
             <objects>
                 <viewController id="ovb-vV-sRt" customClass="FormViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cyw-xH-X2Q" customClass="UIControl">
-                        <rect key="frame" x="0.0" y="64" width="568" height="256"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Título:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ai2-C4-cS7">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="48" id="3xZ-hb-qVg"/>
-                                    <constraint firstAttribute="height" constant="21" id="ypX-JB-aVo"/>
+                                    <constraint firstAttribute="width" constant="48" id="EdG-ZF-3O3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3rC-bc-9gP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Título" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3rC-bc-9gP">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Descripción" translatesAutoresizingMaskIntoConstraints="NO" id="8kk-gB-UNc">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="zSa-Wk-6vf"/>
+                                    <constraint firstAttribute="height" constant="121" id="CiC-mS-bSD"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="700" constant="130" type="user" id="qeg-Vl-3KL"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" type="user" id="tR5-IT-sr4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="vish.png" translatesAutoresizingMaskIntoConstraints="NO" id="u4c-Ap-kWp">
+                            <imageView userInteractionEnabled="NO" alpha="0.50000000000000011" contentMode="scaleToFill" image="vish.png" translatesAutoresizingMaskIntoConstraints="NO" id="u4c-Ap-kWp">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="528" id="xFA-7T-q2M"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" priority="700" constant="96" type="user" id="lon-Rj-aZn"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.74509805439999999" green="0.99607849120000003" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="top" secondItem="8kk-gB-UNc" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="2w2-G7-Sof"/>
-                            <constraint firstItem="8kk-gB-UNc" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="E6O-20-w9n"/>
-                            <constraint firstItem="8kk-gB-UNc" firstAttribute="top" secondItem="3rC-bc-9gP" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="JrF-fB-yRf"/>
-                            <constraint firstItem="Ai2-C4-cS7" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="PAf-vc-5ot"/>
-                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="bottom" secondItem="Cyw-xH-X2Q" secondAttribute="bottom" type="default" id="Rb0-7h-I88"/>
-                            <constraint firstAttribute="trailing" secondItem="3rC-bc-9gP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="UyV-OG-Ph9"/>
-                            <constraint firstItem="Ai2-C4-cS7" firstAttribute="top" secondItem="Cyw-xH-X2Q" secondAttribute="top" constant="20" symbolic="YES" type="default" id="cYv-zn-eSx"/>
-                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="13" id="jSF-RD-q6O"/>
-                            <constraint firstItem="3rC-bc-9gP" firstAttribute="leading" secondItem="Ai2-C4-cS7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="pOB-2U-Whh"/>
-                            <constraint firstItem="3rC-bc-9gP" firstAttribute="baseline" secondItem="Ai2-C4-cS7" secondAttribute="baseline" type="default" id="tWc-BH-eoC"/>
-                            <constraint firstAttribute="trailing" secondItem="8kk-gB-UNc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uJs-g0-UMF"/>
+                            <constraint firstItem="3rC-bc-9gP" firstAttribute="top" secondItem="Cyw-xH-X2Q" secondAttribute="top" constant="17" type="user" id="5df-Lj-3u8"/>
+                            <constraint firstItem="3rC-bc-9gP" firstAttribute="baseline" secondItem="Ai2-C4-cS7" secondAttribute="baseline" type="user" id="8LI-9n-0tL"/>
+                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="8Ts-nz-ZL2"/>
+                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8kk-gB-UNc" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Fi6-kH-cdt"/>
+                            <constraint firstAttribute="trailing" secondItem="u4c-Ap-kWp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="KEH-ar-qqK"/>
+                            <constraint firstAttribute="bottom" secondItem="u4c-Ap-kWp" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="T9U-Kx-v3V"/>
+                            <constraint firstAttribute="trailing" secondItem="3rC-bc-9gP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="fpF-Ab-8fl"/>
+                            <constraint firstItem="Ai2-C4-cS7" firstAttribute="top" secondItem="Cyw-xH-X2Q" secondAttribute="top" constant="20" symbolic="YES" type="user" id="lOe-FM-bvS"/>
+                            <constraint firstItem="8kk-gB-UNc" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="m8a-pt-Dye"/>
+                            <constraint firstItem="3rC-bc-9gP" firstAttribute="leading" secondItem="Ai2-C4-cS7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="mhd-vT-3Q3"/>
+                            <constraint firstItem="Ai2-C4-cS7" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="pmF-vV-kfn"/>
+                            <constraint firstItem="u4c-Ap-kWp" firstAttribute="top" relation="lessThanOrEqual" secondItem="8kk-gB-UNc" secondAttribute="bottom" constant="212" type="user" id="qd4-gn-pmH"/>
+                            <constraint firstAttribute="trailing" secondItem="8kk-gB-UNc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qfZ-4Z-cCI"/>
+                            <constraint firstItem="8kk-gB-UNc" firstAttribute="top" secondItem="3rC-bc-9gP" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="tSf-FX-uMg"/>
                         </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                         <connections>
                             <action selector="hideKbd:" destination="ovb-vV-sRt" eventType="touchUpInside" id="OCf-ak-HLa"/>
                         </connections>
@@ -156,7 +169,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="bodyField" destination="8kk-gB-UNc" id="gYh-P6-nag"/>
                         <outlet property="titleField" destination="3rC-bc-9gP" id="fc5-WC-VLA"/>
@@ -171,7 +183,7 @@
             <objects>
                 <navigationController id="4Cc-Tg-gHP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cWf-0I-ftZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="cWf-0I-ftZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -188,6 +200,32 @@
     <resources>
         <image name="vish.png" width="356" height="108"/>
     </resources>
+    <classes>
+        <class className="FormViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="hideKbd:"/>
+                <relationship kind="outlet" name="bodyField" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MovieRecordViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieRecordViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="record:"/>
+                <relationship kind="outlet" name="_glkView" candidateClass="GLKView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="StartViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="pickVideo:"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
