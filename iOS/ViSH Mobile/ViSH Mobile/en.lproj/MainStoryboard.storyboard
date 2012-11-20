@@ -140,6 +140,9 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" priority="700" constant="96" type="user" id="lon-Rj-aZn"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ay5-z8-i8b">
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.74509805439999999" green="0.99607849120000003" blue="0.99607849120000003" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
@@ -148,11 +151,13 @@
                             <constraint firstItem="u4c-Ap-kWp" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="8Ts-nz-ZL2"/>
                             <constraint firstItem="u4c-Ap-kWp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="8kk-gB-UNc" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="Fi6-kH-cdt"/>
                             <constraint firstAttribute="trailing" secondItem="u4c-Ap-kWp" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="KEH-ar-qqK"/>
+                            <constraint firstItem="Ay5-z8-i8b" firstAttribute="centerX" secondItem="8kk-gB-UNc" secondAttribute="centerX" type="default" id="Lw9-t7-TZi"/>
                             <constraint firstAttribute="bottom" secondItem="u4c-Ap-kWp" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="T9U-Kx-v3V"/>
                             <constraint firstAttribute="trailing" secondItem="3rC-bc-9gP" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="fpF-Ab-8fl"/>
                             <constraint firstItem="Ai2-C4-cS7" firstAttribute="top" secondItem="Cyw-xH-X2Q" secondAttribute="top" constant="20" symbolic="YES" type="user" id="lOe-FM-bvS"/>
                             <constraint firstItem="8kk-gB-UNc" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="m8a-pt-Dye"/>
                             <constraint firstItem="3rC-bc-9gP" firstAttribute="leading" secondItem="Ai2-C4-cS7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="mhd-vT-3Q3"/>
+                            <constraint firstItem="Ay5-z8-i8b" firstAttribute="centerY" secondItem="Cyw-xH-X2Q" secondAttribute="centerY" type="default" id="mpc-vl-R4l"/>
                             <constraint firstItem="Ai2-C4-cS7" firstAttribute="leading" secondItem="Cyw-xH-X2Q" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="pmF-vV-kfn"/>
                             <constraint firstItem="u4c-Ap-kWp" firstAttribute="top" relation="lessThanOrEqual" secondItem="8kk-gB-UNc" secondAttribute="bottom" constant="212" type="user" id="qd4-gn-pmH"/>
                             <constraint firstAttribute="trailing" secondItem="8kk-gB-UNc" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="qfZ-4Z-cCI"/>
@@ -170,6 +175,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actIndicator" destination="Ay5-z8-i8b" id="zWH-q7-3Qw"/>
                         <outlet property="bodyField" destination="8kk-gB-UNc" id="gYh-P6-nag"/>
                         <outlet property="titleField" destination="3rC-bc-9gP" id="fc5-WC-VLA"/>
                     </connections>
@@ -200,32 +206,6 @@
     <resources>
         <image name="vish.png" width="356" height="108"/>
     </resources>
-    <classes>
-        <class className="FormViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hideKbd:"/>
-                <relationship kind="outlet" name="bodyField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="titleField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MovieRecordViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MovieRecordViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="record:"/>
-                <relationship kind="outlet" name="_glkView" candidateClass="GLKView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="StartViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StartViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pickVideo:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -10,10 +10,12 @@
 
 #import "NSData+Base64.h"
 
-@interface FormViewController ()
+@interface FormViewController () <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyField;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView * actIndicator;
 
 @end
 
@@ -140,37 +142,67 @@
     NSURL* requestURL = [NSURL URLWithString:VISH_URL];
     [request setURL:requestURL];
     
-    //  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    // dispatch_queue_t queue = dispatch_queue_create("upload queue", NULL);
+    [self.actIndicator startAnimating];
     
-    // dispatch_async(queue, ^{
-    // Realizar la petición
-    NSHTTPURLResponse * response = nil;
-    NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:request
-                                          returningResponse:&response
-                                                      error:&error];
+    [self hideKbd:self];
     
-    NSInteger code = [response statusCode];
-    NSString * locSC = [NSHTTPURLResponse localizedStringForStatusCode:code];
-    NSLog(@"HTTP Response status code = %d (%@)", code, locSC);
+    dispatch_queue_t queue = dispatch_queue_create("upload queue", NULL);
     
-    //      dispatch_async( dispatch_get_main_queue(), ^{
-    //         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    //     });
+    dispatch_async(queue, ^{
+        // Realizar la petición
+        NSHTTPURLResponse * response = nil;
+        NSError * error = nil;
+        NSData * data = [NSURLConnection sendSynchronousRequest:request
+                                              returningResponse:&response
+                                                          error:&error];
     
-    if (data != nil) {
-        NSLog(@"Exito");
-    } else {
-        NSLog(@"Fallo");
-    }
-    
+        NSInteger code = [response statusCode];
+        NSString * locSC = [NSHTTPURLResponse localizedStringForStatusCode:code];
+        NSLog(@"HTTP Response status code = %d (%@)", code, locSC);
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            [self.actIndicator stopAnimating];
+        });
+        
+        if (data != nil && code == 200) {
+            NSLog(@"Exito");
+            
+            dispatch_async( dispatch_get_main_queue(), ^{
+                UIAlertView * alert = [[UIAlertView alloc]
+                                       initWithTitle:@"Subida terminada"
+                                       message:@"El fichero se ha subido con exito."
+                                       delegate:self
+                                       cancelButtonTitle:@"ok"
+                                       otherButtonTitles:nil];
+                [alert show];
+            });
+        } else {
+            NSLog(@"Fallo");
+            dispatch_async( dispatch_get_main_queue(), ^{
+                UIAlertView * alert = [[UIAlertView alloc]
+                                       initWithTitle:@"Subida fallida"
+                                       message:[NSString stringWithFormat:@"Error: %@", locSC]
+                                       delegate:self
+                                       cancelButtonTitle:@"ok"
+                                       otherButtonTitles:nil];
+                
+                [alert show];
+            });
+        }
+    });
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 60000 // Compiling for iOS < 6.0
+    dispatch_release(queue);
+#endif
+}
+
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     [self.navigationController popViewControllerAnimated:YES];
-     
-    
-    // });
-    
 }
 
 
