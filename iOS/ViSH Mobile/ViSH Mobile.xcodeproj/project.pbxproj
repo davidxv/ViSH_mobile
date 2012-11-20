@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DE3A2BFB165B7F530039A918 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3A2BFA165B7F530039A918 /* NSData+Base64.m */; };
+		DE3F9ACE165ABA77007E158D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9ACD165ABA77007E158D /* UIKit.framework */; };
+		DE3F9AD0165ABA77007E158D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9ACF165ABA77007E158D /* Foundation.framework */; };
+		DE3F9AD2165ABA77007E158D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AD1165ABA77007E158D /* CoreGraphics.framework */; };
+		DE3F9AD8165ABA77007E158D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9AD6165ABA77007E158D /* InfoPlist.strings */; };
+		DE3F9ADA165ABA77007E158D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F9AD9165ABA77007E158D /* main.m */; };
+		DE3F9ADE165ABA77007E158D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F9ADD165ABA77007E158D /* AppDelegate.m */; };
+		DE3F9AE0165ABA77007E158D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9ADF165ABA77007E158D /* Default.png */; };
+		DE3F9AE2165ABA77007E158D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9AE1165ABA77007E158D /* Default@2x.png */; };
+		DE3F9AE4165ABA77007E158D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9AE3165ABA77007E158D /* Default-568h@2x.png */; };
+		DE3F9AE7165ABA77007E158D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9AE5165ABA77007E158D /* MainStoryboard.storyboard */; };
+		DE3F9AEA165ABA77007E158D /* MovieRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F9AE9165ABA77007E158D /* MovieRecordViewController.m */; };
+		DE3F9AF5165ABAB3007E158D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AF4165ABAB3007E158D /* AVFoundation.framework */; };
+		DE3F9AF7165ABAC9007E158D /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AF6165ABAC9007E158D /* CoreImage.framework */; };
+		DE3F9AF9165ABAD4007E158D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AF8165ABAD4007E158D /* CoreMedia.framework */; };
+		DE3F9AFB165ABAE1007E158D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AFA165ABAE1007E158D /* CoreVideo.framework */; };
+		DE3F9AFD165ABAF3007E158D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AFC165ABAF3007E158D /* MobileCoreServices.framework */; };
+		DE3F9AFF165ABB00007E158D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9AFE165ABB00007E158D /* OpenGLES.framework */; };
+		DE3F9B01165ABB0C007E158D /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9B00165ABB0C007E158D /* GLKit.framework */; };
+		DE3F9B03165ABB15007E158D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9B02165ABB15007E158D /* AssetsLibrary.framework */; };
+		DE3F9B06165ABB8E007E158D /* FormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F9B05165ABB8E007E158D /* FormViewController.m */; };
+		DE3F9B08165ABC99007E158D /* vish.png in Resources */ = {isa = PBXBuildFile; fileRef = DE3F9B07165ABC99007E158D /* vish.png */; };
+		DE3F9B1C165ACB07007E158D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3F9B1B165ACB07007E158D /* StartViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DE3A2BF9165B7F530039A918 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		DE3A2BFA165B7F530039A918 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ViSH Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3F9ACD165ABA77007E158D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DE3F9ACF165ABA77007E158D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DE3F9AD1165ABA77007E158D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DE3F9AD5165ABA77007E158D /* ViSH Mobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ViSH Mobile-Info.plist"; sourceTree = "<group>"; };
+		DE3F9AD7165ABA77007E158D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DE3F9AD9165ABA77007E158D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DE3F9ADB165ABA77007E158D /* ViSH Mobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViSH Mobile-Prefix.pch"; sourceTree = "<group>"; };
+		DE3F9ADC165ABA77007E158D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DE3F9ADD165ABA77007E158D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DE3F9ADF165ABA77007E158D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DE3F9AE1165ABA77007E158D /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DE3F9AE3165ABA77007E158D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DE3F9AE6165ABA77007E158D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		DE3F9AE8165ABA77007E158D /* MovieRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieRecordViewController.h; sourceTree = "<group>"; };
+		DE3F9AE9165ABA77007E158D /* MovieRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieRecordViewController.m; sourceTree = "<group>"; };
+		DE3F9AF4165ABAB3007E158D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DE3F9AF6165ABAC9007E158D /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		DE3F9AF8165ABAD4007E158D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		DE3F9AFA165ABAE1007E158D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		DE3F9AFC165ABAF3007E158D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DE3F9AFE165ABB00007E158D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		DE3F9B00165ABB0C007E158D /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		DE3F9B02165ABB15007E158D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		DE3F9B04165ABB8E007E158D /* FormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormViewController.h; sourceTree = "<group>"; };
+		DE3F9B05165ABB8E007E158D /* FormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormViewController.m; sourceTree = "<group>"; };
+		DE3F9B07165ABC99007E158D /* vish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vish.png; sourceTree = "<group>"; };
+		DE3F9B1A165ACB07007E158D /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		DE3F9B1B165ACB07007E158D /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE3F9AC6165ABA77007E158D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3F9B03165ABB15007E158D /* AssetsLibrary.framework in Frameworks */,
+				DE3F9B01165ABB0C007E158D /* GLKit.framework in Frameworks */,
+				DE3F9AFF165ABB00007E158D /* OpenGLES.framework in Frameworks */,
+				DE3F9AFD165ABAF3007E158D /* MobileCoreServices.framework in Frameworks */,
+				DE3F9AFB165ABAE1007E158D /* CoreVideo.framework in Frameworks */,
+				DE3F9AF9165ABAD4007E158D /* CoreMedia.framework in Frameworks */,
+				DE3F9AF7165ABAC9007E158D /* CoreImage.framework in Frameworks */,
+				DE3F9AF5165ABAB3007E158D /* AVFoundation.framework in Frameworks */,
+				DE3F9ACE165ABA77007E158D /* UIKit.framework in Frameworks */,
+				DE3F9AD0165ABA77007E158D /* Foundation.framework in Frameworks */,
+				DE3F9AD2165ABA77007E158D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DE3F9ABE165ABA77007E158D = {
+			isa = PBXGroup;
+			children = (
+				DE3F9AD3165ABA77007E158D /* ViSH Mobile */,
+				DE3F9ACC165ABA77007E158D /* Frameworks */,
+				DE3F9ACA165ABA77007E158D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DE3F9ACA165ABA77007E158D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DE3F9ACC165ABA77007E158D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE3F9B02165ABB15007E158D /* AssetsLibrary.framework */,
+				DE3F9B00165ABB0C007E158D /* GLKit.framework */,
+				DE3F9AFE165ABB00007E158D /* OpenGLES.framework */,
+				DE3F9AFC165ABAF3007E158D /* MobileCoreServices.framework */,
+				DE3F9AFA165ABAE1007E158D /* CoreVideo.framework */,
+				DE3F9AF8165ABAD4007E158D /* CoreMedia.framework */,
+				DE3F9AF6165ABAC9007E158D /* CoreImage.framework */,
+				DE3F9AF4165ABAB3007E158D /* AVFoundation.framework */,
+				DE3F9ACD165ABA77007E158D /* UIKit.framework */,
+				DE3F9ACF165ABA77007E158D /* Foundation.framework */,
+				DE3F9AD1165ABA77007E158D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE3F9AD3165ABA77007E158D /* ViSH Mobile */ = {
+			isa = PBXGroup;
+			children = (
+				DE3F9ADC165ABA77007E158D /* AppDelegate.h */,
+				DE3F9ADD165ABA77007E158D /* AppDelegate.m */,
+				DE3F9AE5165ABA77007E158D /* MainStoryboard.storyboard */,
+				DE3F9B1A165ACB07007E158D /* StartViewController.h */,
+				DE3F9B1B165ACB07007E158D /* StartViewController.m */,
+				DE3F9AE8165ABA77007E158D /* MovieRecordViewController.h */,
+				DE3F9AE9165ABA77007E158D /* MovieRecordViewController.m */,
+				DE3F9B04165ABB8E007E158D /* FormViewController.h */,
+				DE3F9B05165ABB8E007E158D /* FormViewController.m */,
+				DE3F9B07165ABC99007E158D /* vish.png */,
+				DE3A2BF9165B7F530039A918 /* NSData+Base64.h */,
+				DE3A2BFA165B7F530039A918 /* NSData+Base64.m */,
+				DE3F9AD4165ABA77007E158D /* Supporting Files */,
+			);
+			path = "ViSH Mobile";
+			sourceTree = "<group>";
+		};
+		DE3F9AD4165ABA77007E158D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DE3F9AD5165ABA77007E158D /* ViSH Mobile-Info.plist */,
+				DE3F9AD6165ABA77007E158D /* InfoPlist.strings */,
+				DE3F9AD9165ABA77007E158D /* main.m */,
+				DE3F9ADB165ABA77007E158D /* ViSH Mobile-Prefix.pch */,
+				DE3F9ADF165ABA77007E158D /* Default.png */,
+				DE3F9AE1165ABA77007E158D /* Default@2x.png */,
+				DE3F9AE3165ABA77007E158D /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DE3F9AC8165ABA77007E158D /* ViSH Mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE3F9AED165ABA77007E158D /* Build configuration list for PBXNativeTarget "ViSH Mobile" */;
+			buildPhases = (
+				DE3F9AC5165ABA77007E158D /* Sources */,
+				DE3F9AC6165ABA77007E158D /* Frameworks */,
+				DE3F9AC7165ABA77007E158D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ViSH Mobile";
+			productName = "ViSH Mobile";
+			productReference = DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE3F9AC0165ABA77007E158D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = UPM;
+			};
+			buildConfigurationList = DE3F9AC3165ABA77007E158D /* Build configuration list for PBXProject "ViSH Mobile" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DE3F9ABE165ABA77007E158D;
+			productRefGroup = DE3F9ACA165ABA77007E158D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE3F9AC8165ABA77007E158D /* ViSH Mobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE3F9AC7165ABA77007E158D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3F9AD8165ABA77007E158D /* InfoPlist.strings in Resources */,
+				DE3F9AE0165ABA77007E158D /* Default.png in Resources */,
+				DE3F9AE2165ABA77007E158D /* Default@2x.png in Resources */,
+				DE3F9AE4165ABA77007E158D /* Default-568h@2x.png in Resources */,
+				DE3F9AE7165ABA77007E158D /* MainStoryboard.storyboard in Resources */,
+				DE3F9B08165ABC99007E158D /* vish.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE3F9AC5165ABA77007E158D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE3F9ADA165ABA77007E158D /* main.m in Sources */,
+				DE3F9ADE165ABA77007E158D /* AppDelegate.m in Sources */,
+				DE3F9AEA165ABA77007E158D /* MovieRecordViewController.m in Sources */,
+				DE3F9B06165ABB8E007E158D /* FormViewController.m in Sources */,
+				DE3F9B1C165ACB07007E158D /* StartViewController.m in Sources */,
+				DE3A2BFB165B7F530039A918 /* NSData+Base64.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DE3F9AD6165ABA77007E158D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE3F9AD7165ABA77007E158D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DE3F9AE5165ABA77007E158D /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DE3F9AE6165ABA77007E158D /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DE3F9AEB165ABA77007E158D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DE3F9AEC165ABA77007E158D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DE3F9AEE165ABA77007E158D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ViSH Mobile/ViSH Mobile-Prefix.pch";
+				INFOPLIST_FILE = "ViSH Mobile/ViSH Mobile-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DE3F9AEF165ABA77007E158D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ViSH Mobile/ViSH Mobile-Prefix.pch";
+				INFOPLIST_FILE = "ViSH Mobile/ViSH Mobile-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE3F9AC3165ABA77007E158D /* Build configuration list for PBXProject "ViSH Mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3F9AEB165ABA77007E158D /* Debug */,
+				DE3F9AEC165ABA77007E158D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE3F9AED165ABA77007E158D /* Build configuration list for PBXNativeTarget "ViSH Mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE3F9AEE165ABA77007E158D /* Debug */,
+				DE3F9AEF165ABA77007E158D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE3F9AC0165ABA77007E158D /* Project object */;
+}
