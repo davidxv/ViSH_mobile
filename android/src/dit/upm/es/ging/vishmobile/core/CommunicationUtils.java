@@ -44,8 +44,9 @@ public class CommunicationUtils {
 	 * 
 	 * @param inStream
 	 * @return a String representation of the result InputStream
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static String readStream(InputStream inStream) {
+	public static String readStream(InputStream inStream) throws UnsupportedEncodingException {
 		BufferedReader r = new BufferedReader(new InputStreamReader(inStream));
 		StringBuilder total = new StringBuilder();
 		String line;
@@ -106,6 +107,9 @@ public class CommunicationUtils {
 	public static boolean isErrorResponseCode(int responseCode){
 		 //TODO Apply regex to detect if responseCode starts with 4 or 5
 		if(responseCode==HttpURLConnection.HTTP_UNAUTHORIZED){
+			return true;
+		}
+		if(responseCode==HttpURLConnection.HTTP_INTERNAL_ERROR){
 			return true;
 		}
 		return false;
