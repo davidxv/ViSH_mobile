@@ -253,7 +253,10 @@ AVCaptureMetadataOutputObjectsDelegate>
         return;
     }
     
-    NSDictionary *outputSettings = @{ AVVideoCodecKey : AVVideoCodecH264,
+    _assetWriter.shouldOptimizeForNetworkUse = YES;
+    
+    NSDictionary *outputSettings = @{
+    AVVideoCodecKey : AVVideoCodecH264,
     AVVideoWidthKey : @640,
     AVVideoHeightKey : @480
     };
@@ -307,8 +310,9 @@ AVCaptureMetadataOutputObjectsDelegate>
     } else {
         _isWriting = NO;
         button.title = @"Record";
-        [_assetWriter finishWriting];
-        [self saveMovieToCameraRoll];
+        [_assetWriter finishWritingWithCompletionHandler:^{
+            [self saveMovieToCameraRoll];
+        }];
     }
 }
 
@@ -323,7 +327,7 @@ AVCaptureMetadataOutputObjectsDelegate>
                                         NSLog(@"Error %@", [error localizedDescription]);
                                     } else {
                                         [self checkForAndDeleteFile];
-                                        NSLog(@"finished saving");
+                                        NSLog(@"Finished saving %@", assetURL);
                                     }
                                 }];
 }
