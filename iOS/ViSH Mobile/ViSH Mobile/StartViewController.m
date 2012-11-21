@@ -62,7 +62,7 @@
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         imagePicker.mediaTypes = @[(NSString *)kUTTypeMovie];
-        imagePicker.allowsEditing = NO;
+        imagePicker.allowsEditing = YES;
         
         [self presentViewController:imagePicker
                            animated:YES
