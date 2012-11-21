@@ -97,7 +97,8 @@ public class MainActivity extends Activity {
 				}
 			}); 
 	        
-	        CommunicationManager.uploadDocument();
+//	        Testing
+//	        CommunicationManager.uploadTestDocument();
 	 }
 	 
 	 @Override
@@ -108,18 +109,18 @@ public class MainActivity extends Activity {
 	             // Image captured and saved to fileUri specified in the Intent
 	        	 // data.getData() is null, because the file path has been specified in the MediaStore.EXTRA_OUTPUT option.
 	        	 if(fileUri!=null){
-	        		 Log.i("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image captured and saved to " + fileUri.toString());
+	        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image captured and saved to " + fileUri.toString());
 	        	 } else {
-	        		 Log.i("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","file URI is null");
+	        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","file URI is null");
 	        	 }
 	        	
 	        	 showConfirmationDialog();
 	         } else if (resultCode == RESULT_CANCELED) {
 	             // User cancelled the image capture
-	        	 Log.i("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","User cancelled the image capture");
+	        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","User cancelled the image capture");
 	         } else {
 	             // Image capture failed, advise user
-	        	 Log.i("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image capture failed");
+	        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image capture failed");
 	         }
 	     }
 	     // response for videos
@@ -145,7 +146,8 @@ public class MainActivity extends Activity {
 		     public void onClick(DialogInterface dialog, int which) {
 		         // Do do my action here
 		    	 if(fileUri!=null){
-		    		 CommunicationManager.uploadDocument(fileUri,"Title","Description");
+		    		 //TODO Call uploadDocument with aynchronous task, don't lock UI
+		    		 CommunicationManager.uploadDocument(fileUri.getPath(), "Title", "Uploaded via ViSH Mobile for Android");
 		    	 } else {
 		    		 Log.e("Error","fileURI IS NULL");
 		    	 }

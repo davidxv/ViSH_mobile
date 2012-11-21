@@ -59,13 +59,9 @@ public class LoginActivity extends Activity {
 				String username = mUsernameText.getText().toString();
 				String password = mPasswordText.getText().toString();
 				String authToken = "";
-				try {
-					authToken = CommunicationUtils.generateAuthenticationTokenFromUserPassword(username, password);
-					// execute the login process
-					new LoginTask().execute(authToken);
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				authToken = CommunicationUtils.generateAuthenticationTokenFromUserPassword(username, password);
+				// execute the login process
+				new LoginTask().execute(authToken);
 			}
 		});
     }

@@ -19,7 +19,11 @@ public class Constants {
 	public static final String FORMAT_UNKNOWN = "unknown";
 	
 	//Developping
+	public static final boolean VISH_LOCAL = true; //False to use VISH_TEST
 	public static final String DEV_SERVER_URI = "http://138.4.4.164:3000/";
-	public static final String VISH_TEST = "demo@social-stream.dit.upm.es:demonstration";
-	public static final int DEMO_ID = 1;
+	public static final String EMAIL_TEST = "demo@social-stream.dit.upm.es";
+	public static final String PASS_TEST = "demonstration";
+	public static final String AUTH_TOKEN_TEST = "Basic ZGVtb0Bzb2NpYWwtc3RyZWFtLmRpdC51cG0uZXM6ZGVtb25zdHJhdGlvbg==";
+	public static final int USER_ID_TEST = 1; //id of demo user, also id for demo's actor.
+	public static final String PATH_IMAGE_TEST = "/mnt/sdcard/Pictures/VishPictures/test.jpg";
 }

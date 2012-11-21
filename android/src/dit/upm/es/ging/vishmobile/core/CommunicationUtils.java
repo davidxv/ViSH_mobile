@@ -4,6 +4,10 @@
 package dit.upm.es.ging.vishmobile.core;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -75,7 +79,7 @@ public class CommunicationUtils {
 	 * @return generated authentication token
 	 * @throws UnsupportedEncodingException on base64 encoding exception
 	 */
-	public static String generateAuthenticationTokenFromUserPassword(String username, String password) throws UnsupportedEncodingException {
+	public static String generateAuthenticationTokenFromUserPassword(String username, String password) {
 		String authString = username + ":" + password;
         // On Android, the default charset is UTF-8.
 		// NO_WRAP means that the Base64 encoder uses a flag bit to omit all line terminators (i.e., the output will be on one long line)
@@ -115,4 +119,49 @@ public class CommunicationUtils {
 		return false;
 	}
 
+	/**
+	 * Multipart Utils
+	 */
+	
+	//Constants
+	protected static final String lineEnd = "\r\n";
+	protected static final String twoHyphens = "--";
+	
+	//Variables
+	private static String currentBoundary;
+		
+	protected static String generateBoundary(){
+		//TODO make me random!
+		currentBoundary = "----VishMobileBoundaryo5L8LSN7JKaL1jud";
+		return currentBoundary;
+	}
+	
+	protected static String getCurrentBoundary(){
+		return currentBoundary;
+	}
+	
+	protected static void writeMultipartField(DataOutputStream outputStream, String header, String content) throws IOException{
+		outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
+		outputStream.writeBytes(header + lineEnd);
+		outputStream.writeBytes(lineEnd);
+		outputStream.writeBytes(content);
+		outputStream.writeBytes(lineEnd);
+	}
+	
+	protected static void writeFileInMultipartField(DataOutputStream outputStream, File file) throws IOException{
+		outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
+		outputStream.writeBytes("Content-Disposition: form-data; name=\"document[file]\"; filename=\"" + file.getName() +"\"" + lineEnd);
+		outputStream.writeBytes(lineEnd);
+	
+		FileInputStream fileInputStream = new FileInputStream(file);
+		DataInputStream inputFileStream =  new DataInputStream(fileInputStream);
+		int bytesRead;
+		byte[] buffer = new byte[1024];
+		while ((bytesRead = inputFileStream.read(buffer, 0, 1024)) > 0) {
+			outputStream.write(buffer, 0, bytesRead);
+		}	
+		fileInputStream.close();
+		
+		outputStream.writeBytes(lineEnd);
+	}
 }
