@@ -64,6 +64,8 @@
         imagePicker.mediaTypes = @[(NSString *)kUTTypeMovie];
         imagePicker.allowsEditing = YES;
         
+        imagePicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+        
         [self presentViewController:imagePicker
                            animated:YES
                          completion:nil];
