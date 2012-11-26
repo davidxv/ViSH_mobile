@@ -4,15 +4,18 @@
 package dit.upm.es.ging.vishmobile.core;
 
 import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
 
 
 /**
@@ -21,6 +24,7 @@ import org.json.JSONObject;
  *
  */
 public class CommunicationManager {
+	
 	
 	// Classic Singleton implementation.
 	private static CommunicationManager instance = null;
@@ -71,24 +75,10 @@ public class CommunicationManager {
 		return response;
 	}
 	
-	/**
-	 * 
-	 * @param file
-	 * @param title
-	 * @param description
-	 * @return
-	 */
-	public ServerResponse uploadDocument(String file, String title, String description) {
-		String uri = Constants.SERVER_URI + "/documents.json";
-		String body = "";
-		ServerResponse result = postRequest(uri, body);
-		return result;
-	}
-	
 	
 	/* 
 	 * ======================================== 
-	 * 				HTTP REQUESTS 
+	 * 				HTTP GET REQUESTS 
 	 * ======================================== 
 	 */
 	
@@ -168,75 +158,121 @@ public class CommunicationManager {
 		return response;
 	}
 	
+	
+	
+	/* 
+	 * ======================================== 
+	 * 				HTTP POSTS 
+	 * ======================================== 
+	 */
+	
 	/**
-	 * HTTP POST request
+	 * UPLOAD DOCUMENT
 	 * ******************
 	 * 
-	 * @param url
-	 * @param body
+	 * @param filePath
+	 * @param Title
+	 * @param Description
 	 * @return
 	 */
-	private ServerResponse postRequest(String uri, String body) {
-		return this.postRequestAuthorizationBasic(uri, body, Model.getAuthenticationToken());
+	public static ServerResponse uploadDocument(String filePath, String title, String description) {
+		return postRequestUploadFile(Constants.SERVER_URI+Constants.DOCUMENTS_PATH, filePath, title, description, Model.getAuthenticationToken());
 	}
 	
 	/**
 	 * HTTP POST request (Authorization: Basic)
 	 * ******************************************
-	 * 
+	 * Request to upload a file using multipart and basic authentication.
 	 * @param url
-	 * @param body
+	 * @param filePath
 	 * @param authenticationToken
 	 * @return
 	 */
-	private ServerResponse postRequestAuthorizationBasic(String uri, String body, String authenticationToken) {
-		// the string to store the response text from the server
-        ServerResponse response= new ServerResponse();
-		try {
+	private static ServerResponse postRequestUploadFile(String uri, String filePath, String title, String description, String authenticationToken) {
+		ServerResponse response = new ServerResponse();
+		
+		HttpURLConnection connection = null;
+		DataOutputStream outputStream = null;
+	
+		File file = new File(filePath);
+	
+		try	{		
 			URL url = new URL(uri);
-	        HttpURLConnection postConnection = (HttpURLConnection) url.openConnection();
-	        //set the output to true, indicating you are outputting(uploading) POST data
-	        postConnection.setDoOutput(true);
-	        //once we set the output to true, we don't really need to set the request method to post, but I'm doing it anyway
-	        postConnection.setRequestMethod("POST");
-	        //set the length of the data we are sending to the server
-	        int contentLenght = body.getBytes().length;
-	        postConnection.setFixedLengthStreamingMode(contentLenght);
-	        
-	        // Authorization header
-	        postConnection.setRequestProperty("Authorization", authenticationToken);
-	        
-	        // Content-type header
-	        postConnection.setRequestProperty("Content-Type", "application/json");
-	        
-	        // Content-Length header
-	        postConnection.setRequestProperty("Content-Length", ""+contentLenght);
-	        
-	        //send the POST out
-	        PrintWriter out = new PrintWriter(postConnection.getOutputStream());
-	        out.print(body);
-	        out.close();
-	        
-	        //start listening to the stream
-	        int responseCode = postConnection.getResponseCode();
-	        InputStream inStream = new BufferedInputStream(postConnection.getInputStream());
-	        String json = CommunicationUtils.readStream(inStream);
-	        response = new ServerResponse(responseCode, new JSONObject(json));
-	        
-	        // close connections
+			connection = (HttpURLConnection) url.openConnection();
+		
+			// Allow Inputs & Outputs
+			connection.setDoInput(true);
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
+	
+			// Enable POST method
+			connection.setRequestMethod("POST");
+		        
+		    // Authorization header
+		    connection.setRequestProperty("Authorization", authenticationToken);  
+		        
+			connection.setRequestProperty("Connection", "Keep-Alive");
+			
+			//Multipart Header
+			String boundary = CommunicationUtils.generateBoundary();
+			connection.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+			
+			outputStream = new DataOutputStream(connection.getOutputStream());
+			
+			CommunicationUtils.writeFileInMultipartField(outputStream,file);
+			if(title!=null){
+				CommunicationUtils.writeMultipartField(outputStream, "Content-Disposition: form-data; name=\"document[title]\"",title);
+			}
+			if(description!=null){
+				CommunicationUtils.writeMultipartField(outputStream, "Content-Disposition: form-data; name=\"document[description]\"",description);
+			}
+						
+			outputStream.writeBytes(CommunicationUtils.twoHyphens + boundary + CommunicationUtils.twoHyphens + CommunicationUtils.lineEnd);
+	
+			outputStream.flush();
+			outputStream.close();
+			
+			// Responses from the server (code and message)
+			int responseCode = connection.getResponseCode();
+			response.setResponseCode(responseCode);
+			Log.d("Server Response code", Integer.toString(responseCode));
+			
+			String serverResponseMessage = connection.getResponseMessage();
+			Log.d("serverResponseMessage",serverResponseMessage);
+			
+			InputStream inStream;
+	        if(CommunicationUtils.isErrorResponseCode(responseCode)){
+	        	inStream = connection.getErrorStream();
+	        } else {
+	        	inStream = connection.getInputStream();
+	        }
+	        InputStream inBufStream = new BufferedInputStream(inStream);
+	        String responseText = CommunicationUtils.readStream(inBufStream);
 	        inStream.close();
-	        postConnection.disconnect();
-		}
-		catch(MalformedURLException e) {
-			e.printStackTrace();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		} 
-		catch (JSONException e) {
+	        
+	        Log.d("responseText",responseText);
+	        
+	        String contentType = CommunicationUtils.getContentType(connection.getContentType());
+	        if(contentType.equals(Constants.FORMAT_JSON)){
+	        	try {
+	        		response.setResponseResult(new JSONObject(responseText));
+	        	} catch (JSONException e){
+	        		e.printStackTrace();
+	        	}
+	        }
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return response;
+	}
+	
+	
+	/**
+	 * Just for Testing
+	 * @return
+	 */
+	public static ServerResponse uploadTestDocument(){
+		return postRequestUploadFile(Constants.SERVER_URI+Constants.DOCUMENTS_PATH, Constants.PATH_IMAGE_TEST, "Title", "Description", Constants.AUTH_TOKEN_TEST);
 	}
 	
 

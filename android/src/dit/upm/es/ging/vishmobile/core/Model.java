@@ -41,6 +41,9 @@ public class Model {
 	}
 	
 	public static String getAuthenticationToken() {
+		if(Constants.VISH_LOCAL){
+			return Constants.AUTH_TOKEN_TEST;
+		}
 		return mAuthenticationToken;
 	}
 	
