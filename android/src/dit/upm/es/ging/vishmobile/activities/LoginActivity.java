@@ -3,7 +3,6 @@
  */
 package dit.upm.es.ging.vishmobile.activities;
 
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 
 import org.json.JSONException;
@@ -14,12 +13,13 @@ import dit.upm.es.ging.vishmobile.core.CommunicationUtils;
 import dit.upm.es.ging.vishmobile.core.Model;
 import dit.upm.es.ging.vishmobile.core.ServerResponse;
 import dit.upm.es.ging.vishmobile.utils.UIutils;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import android.content.Intent;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo MÃ©ndez
+ * @author Aldo Gordillo Méndez
  *
  */
 public class LoginActivity extends Activity {
@@ -47,14 +47,24 @@ public class LoginActivity extends Activity {
         // Password
         mPasswordText = (EditText)findViewById(R.id.password);
         
+        // Cancel button
+        Button cancelButton = (Button)findViewById(R.id.loginCancel);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(LoginActivity.this, MainActivity.class);
+				startActivity(i);
+				LoginActivity.this.finish();
+			}
+		});
+        
         // Ok button
         Button okButton = (Button)findViewById(R.id.loginButton);
         okButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO validate username and password
-				
 				// Generate authentication token
 				String username = mUsernameText.getText().toString();
 				String password = mPasswordText.getText().toString();
@@ -62,6 +72,18 @@ public class LoginActivity extends Activity {
 				authToken = CommunicationUtils.generateAuthenticationTokenFromUserPassword(username, password);
 				// execute the login process
 				new LoginTask().execute(authToken);
+			}
+		});
+        
+        // Sign up
+        TextView signUp = (TextView)findViewById(R.id.signUp);
+        signUp.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// launch the ViSH web page in the browser
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://vishub-test.global.dit.upm.es/users/sign_up"));
+				startActivity(browserIntent);
 			}
 		});
     }
@@ -99,16 +121,13 @@ public class LoginActivity extends Activity {
     				e.printStackTrace();
     			}
     			
-//    			Log.i("AuthToken",Model.getAuthenticationToken(LoginActivity.this));
-//    			Log.i("Username",Model.getUserName(LoginActivity.this));
-    			
-    			// Go to the main activity
-    			Intent i = new Intent(LoginActivity.this, MainActivity.class);
-    			startActivity(i);
+    			// Go to the Upload Document activity
+    			Intent intent = new Intent(LoginActivity.this, UploadDocumentActivity.class);
+    			startActivity(intent);
     			LoginActivity.this.finish();
     		} else {
     			// Inform the user about the problem
-    			UIutils.showDialogToUser(LoginActivity.this, getString(R.string.login_error_title), getString(R.string.login_error_text));
+    			UIutils.showDialog(LoginActivity.this, getString(R.string.login_error_title), getString(R.string.login_error_text));
     		}
     	}
     	

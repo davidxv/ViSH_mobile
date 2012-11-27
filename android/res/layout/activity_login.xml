@@ -1,40 +1,82 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="20dp">
-    
-	<ImageView 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_marginBottom="40dp"
-	    android:src="@drawable/vish_logo"
-	    />
-    
-    <EditText 
-        android:id="@+id/username"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="20dp"
-		android:hint="@string/login"
-        />
-
-    <EditText 
-        android:id="@+id/password"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginBottom="20dp"
-		android:hint="@string/password"
-		android:password="true"
-        />
-    
-    <Button
-        android:id="@+id/loginButton"
+	>
+	    
+    <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_ok"
-        />
+    	android:layout_height="match_parent"
+    	android:orientation="vertical"
+    	android:gravity="center_horizontal"
+    	android:layout_marginTop="40dp"
+    	android:layout_marginLeft="20dp"
+    	android:layout_marginRight="20dp"
+    	>
+    
+		<ImageView 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_marginBottom="40dp"
+		    android:src="@drawable/vish_logo"
+		    />
+		
+		<TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="20dp"
+	        android:text="@string/login_instructions"
+	        android:gravity="center"
+	        />
+	    
+	    <EditText 
+	        android:id="@+id/username"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:hint="@string/login"
+	        />
+	
+	    <EditText 
+	        android:id="@+id/password"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:hint="@string/password"
+			android:password="true"
+	        />
+	    
+	    <LinearLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="20dp"
+	        >
+	        <Button
+		        android:id="@+id/loginCancel"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/button_cancel"
+		        />
+	        <Button
+		        android:id="@+id/loginButton"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_weight="1"
+		        android:text="@string/button_ok"
+		        />
+	    </LinearLayout>
+	    
+	    <TextView
+	        android:id="@+id/signUp"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="20dp"
+	        android:gravity="center"
+	        android:text="@string/sign_up"
+	        android:clickable="true"
+	        />
+	    
+	</LinearLayout>
 
-</LinearLayout>
+</ScrollView>

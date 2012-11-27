@@ -7,6 +7,8 @@ import dit.upm.es.ging.vishmobile.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.Gravity;
+import android.widget.Toast;
 
 /**
  * @author Daniel Gallego Vico
@@ -21,7 +23,7 @@ public class UIutils {
      * @param title
      * @param message
      */
-    public static void showDialogToUser(Context context, String title, String message) {
+    public static void showDialog(Context context, String title, String message) {
     	AlertDialog.Builder builder = new AlertDialog.Builder(context);
     	builder.setMessage(message)
     			.setTitle(title)
@@ -33,5 +35,17 @@ public class UIutils {
     	       });
     	AlertDialog alert = builder.create();
     	alert.show();
+    }
+    
+    /**
+     * Show a toast message to the user with the text provided.
+     * 
+     * @param context
+     * @param msg
+     */
+    public static void showToast(Context context, String text) {
+    	int duration = Toast.LENGTH_SHORT;
+    	Toast toast = Toast.makeText(context, text, duration);
+    	toast.show();
     }
 }

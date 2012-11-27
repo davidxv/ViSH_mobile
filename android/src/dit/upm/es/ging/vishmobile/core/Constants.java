@@ -9,8 +9,8 @@ package dit.upm.es.ging.vishmobile.core;
  *
  */
 public class Constants {
-//	public static final String SERVER_URI = "http://vishub-test.global.dit.upm.es/";
-	public static final String SERVER_URI = "http://138.4.4.164:3000/";
+	public static final String SERVER_URI = "http://vishub-test.global.dit.upm.es/";
+//	public static final String SERVER_URI = "http://138.4.4.164:3000/";
 	public static final String USER_INFO_PATH = "home.json";
 	public static final String DOCUMENTS_PATH = "documents.json";
 	
@@ -19,7 +19,7 @@ public class Constants {
 	public static final String FORMAT_UNKNOWN = "unknown";
 	
 	//Developping
-	public static final boolean VISH_LOCAL = true; //False to use VISH_TEST
+	public static final boolean VISH_LOCAL = false; //False to use VISH_TEST
 	public static final String DEV_SERVER_URI = "http://138.4.4.164:3000/";
 	public static final String EMAIL_TEST = "demo@social-stream.dit.upm.es";
 	public static final String PASS_TEST = "demonstration";

@@ -1,9 +1,14 @@
 <resources>
 
-    <string name="app_name">ViSH mobile</string>
+    <string name="app_name">Vishub</string>
 
     <!-- BUTTONS -->
     <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    
+    
+    <!-- MENU -->
+    <string name="menu_logout">Log out</string>
     
     
     <!-- GENERAL MESSAGES -->
@@ -15,12 +20,24 @@
     <!-- LOGIN -->
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="login_instructions">You need to sign in or sign up before continuing.</string>
+    <string name="sign_up">Sign up</string>
     
     
     <!-- MAIN -->
-    <string name="instructions">If you want to upload a media resource to ViSH simply take a new photo/video or select one from your gallery.</string>
+    <string name="main_instructions">If you want to upload a media resource to ViSH simply take a new photo/video or select one from your gallery.</string>
     <string name="capture_image">Capture image</string>
     <string name="capture_video">Capture video</string>
     <string name="gallery">Select from gallery</string>
+    <string name="msg_logout">Logout successful</string>
+    
+    
+    <!-- UPLOAD DOCUMENT -->
+    <string name="upload_document_instructions">Please, fill in the details related to the document you want to upload.</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="tags">Tags</string>
+    <string name="msg_upload_successful">The document has been successfully uploaded</string>
+    <string name="msg_upload_fail">The upload has failed! Please try again.</string>
     
 </resources>
