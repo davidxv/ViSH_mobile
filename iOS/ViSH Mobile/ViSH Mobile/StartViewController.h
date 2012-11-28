@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StartViewController : UIViewController
+@interface StartViewController : UITableViewController
+
+-(IBAction)goCamera:(id)sender;
+
+-(IBAction)goGallery:(id)sender;
+
++(BOOL)authenticate;
 
 @end

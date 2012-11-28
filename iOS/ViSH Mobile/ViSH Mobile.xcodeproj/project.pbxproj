@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		382A54CB16650F6600453EB4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 382A54CA16650F6600453EB4 /* Icon@2x.png */; };
+		382DE577166638D800C09938 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382DE576166638D800C09938 /* LoginViewController.m */; };
 		DE34726C165BE03C00645D3E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE34726B165BE03C00645D3E /* Settings.bundle */; };
 		DE3A2BFB165B7F530039A918 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3A2BFA165B7F530039A918 /* NSData+Base64.m */; };
 		DE3F9ACE165ABA77007E158D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE3F9ACD165ABA77007E158D /* UIKit.framework */; };
@@ -34,10 +36,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		382A54CA16650F6600453EB4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		382DE575166638D800C09938 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		382DE576166638D800C09938 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		DE34726B165BE03C00645D3E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		DE3A2BF9165B7F530039A918 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		DE3A2BFA165B7F530039A918 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ViSH Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3F9AC9165ABA77007E158D /* Vishub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vishub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3F9ACD165ABA77007E158D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DE3F9ACF165ABA77007E158D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DE3F9AD1165ABA77007E158D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,6 +95,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		382DE579166638F600C09938 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				DE3F9B07165ABC99007E158D /* vish.png */,
+				382A54CA16650F6600453EB4 /* Icon@2x.png */,
+				DE3F9ADF165ABA77007E158D /* Default.png */,
+				DE3F9AE1165ABA77007E158D /* Default@2x.png */,
+				DE3F9AE3165ABA77007E158D /* Default-568h@2x.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		DE3F9ABE165ABA77007E158D = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +119,7 @@
 		DE3F9ACA165ABA77007E158D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */,
+				DE3F9AC9165ABA77007E158D /* Vishub.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,13 +150,15 @@
 				DE3F9AE5165ABA77007E158D /* MainStoryboard.storyboard */,
 				DE3F9B1A165ACB07007E158D /* StartViewController.h */,
 				DE3F9B1B165ACB07007E158D /* StartViewController.m */,
-				DE3F9AE8165ABA77007E158D /* MovieRecordViewController.h */,
-				DE3F9AE9165ABA77007E158D /* MovieRecordViewController.m */,
+				382DE575166638D800C09938 /* LoginViewController.h */,
+				382DE576166638D800C09938 /* LoginViewController.m */,
 				DE3F9B04165ABB8E007E158D /* FormViewController.h */,
 				DE3F9B05165ABB8E007E158D /* FormViewController.m */,
-				DE3F9B07165ABC99007E158D /* vish.png */,
+				DE3F9AE8165ABA77007E158D /* MovieRecordViewController.h */,
+				DE3F9AE9165ABA77007E158D /* MovieRecordViewController.m */,
 				DE3A2BF9165B7F530039A918 /* NSData+Base64.h */,
 				DE3A2BFA165B7F530039A918 /* NSData+Base64.m */,
+				382DE579166638F600C09938 /* images */,
 				DE3F9AD4165ABA77007E158D /* Supporting Files */,
 				DE34726B165BE03C00645D3E /* Settings.bundle */,
 			);
@@ -153,9 +172,6 @@
 				DE3F9AD6165ABA77007E158D /* InfoPlist.strings */,
 				DE3F9AD9165ABA77007E158D /* main.m */,
 				DE3F9ADB165ABA77007E158D /* ViSH Mobile-Prefix.pch */,
-				DE3F9ADF165ABA77007E158D /* Default.png */,
-				DE3F9AE1165ABA77007E158D /* Default@2x.png */,
-				DE3F9AE3165ABA77007E158D /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -177,7 +193,7 @@
 			);
 			name = "ViSH Mobile";
 			productName = "ViSH Mobile";
-			productReference = DE3F9AC9165ABA77007E158D /* ViSH Mobile.app */;
+			productReference = DE3F9AC9165ABA77007E158D /* Vishub.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -218,6 +234,7 @@
 				DE3F9AE7165ABA77007E158D /* MainStoryboard.storyboard in Resources */,
 				DE3F9B08165ABC99007E158D /* vish.png in Resources */,
 				DE34726C165BE03C00645D3E /* Settings.bundle in Resources */,
+				382A54CB16650F6600453EB4 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +251,7 @@
 				DE3F9B06165ABB8E007E158D /* FormViewController.m in Sources */,
 				DE3F9B1C165ACB07007E158D /* StartViewController.m in Sources */,
 				DE3A2BFB165B7F530039A918 /* NSData+Base64.m in Sources */,
+				382DE577166638D800C09938 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +333,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViSH Mobile/ViSH Mobile-Prefix.pch";
 				INFOPLIST_FILE = "ViSH Mobile/ViSH Mobile-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vishub;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -326,7 +344,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ViSH Mobile/ViSH Mobile-Prefix.pch";
 				INFOPLIST_FILE = "ViSH Mobile/ViSH Mobile-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vishub;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
