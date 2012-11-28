@@ -115,7 +115,7 @@ public class Model {
 	 * @param fileUri
 	 */
 	public static void setFileUri(Uri fileUri) {
-		mFileUri = fileUri;
+		Model.mFileUri = fileUri;
 	}
 	
 	/**

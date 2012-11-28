@@ -100,7 +100,7 @@ public class LoginActivity extends Activity {
     	
     	protected void onPreExecute() {
     		// show dialog information
-    		this.progressDialog = ProgressDialog.show(LoginActivity.this, getString(R.string.loading), getString(R.string.loading));
+    		this.progressDialog = ProgressDialog.show(LoginActivity.this, getString(R.string.uploading), getString(R.string.uploading));
     	}
     	
     	protected ServerResponse doInBackground(String... params) {
@@ -116,7 +116,7 @@ public class LoginActivity extends Activity {
     			// Save authorization token in the model
     			Model.setAuthenticationToken(LoginActivity.this,authenticationToken);
     			try {
-    				Model.setUserName(LoginActivity.this,response.getResponseResult().get("name").toString());
+    				Model.setUserName(LoginActivity.this, response.getResponseResult().get("name").toString());
     			} catch (JSONException e){
     				e.printStackTrace();
     			}

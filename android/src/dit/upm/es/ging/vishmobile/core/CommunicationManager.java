@@ -162,7 +162,7 @@ public class CommunicationManager {
 	
 	/* 
 	 * ======================================== 
-	 * 				HTTP POSTS 
+	 * 				HTTP POST REQUESTS 
 	 * ======================================== 
 	 */
 	

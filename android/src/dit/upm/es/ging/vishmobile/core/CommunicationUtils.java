@@ -143,6 +143,7 @@ public class CommunicationUtils {
 	protected static void writeMultipartField(DataOutputStream outputStream, String header, String content) throws IOException{
 		outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
 		outputStream.writeBytes(header + lineEnd);
+		outputStream.writeBytes("Content-Type:text/plain;charset=UTF-8;");
 		outputStream.writeBytes(lineEnd);
 		outputStream.writeBytes(content);
 		outputStream.writeBytes(lineEnd);

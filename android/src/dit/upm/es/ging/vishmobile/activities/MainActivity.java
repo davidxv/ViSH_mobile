@@ -183,6 +183,8 @@ public class MainActivity extends Activity {
 		            cursor.close();
 		            // save the file uri in the model
 		            Model.setFileUri(Uri.fromFile(new File(filePath)));
+		            // check credentials to do login if necessary 
+		        	new CheckCredentialsTask().execute();
 		            
 		        } else if (resultCode == RESULT_CANCELED) {
 		             // User cancelled the picking action
@@ -195,8 +197,6 @@ public class MainActivity extends Activity {
 			default:
 				break;
 		}
-		// check credentials to do login if necessary 
-    	new CheckCredentialsTask().execute();
 	 }
 	 
 	 
@@ -210,22 +210,19 @@ public class MainActivity extends Activity {
 	 private class CheckCredentialsTask extends AsyncTask<String, Void, ServerResponse> {
     	
     	private ProgressDialog progressDialog;
-    	private String authenticationToken;
     	
     	protected void onPreExecute() {
     		// show dialog information
-    		this.progressDialog = ProgressDialog.show(MainActivity.this, getString(R.string.loading), getString(R.string.loading));
+    		this.progressDialog = ProgressDialog.show(MainActivity.this, getString(R.string.uploading), getString(R.string.uploading));
     	}
     	
     	protected ServerResponse doInBackground(String... params) {
-			authenticationToken = Model.getAuthenticationToken();
+			String authenticationToken = Model.getAuthenticationToken();
+			ServerResponse result = null;
 			if(authenticationToken != null) {
-				ServerResponse result = CommunicationManager.getInstance().checkAuthenticationTokenValidity(authenticationToken);
-				return result;
+				result = CommunicationManager.getInstance().checkAuthenticationTokenValidity(authenticationToken);
 			}
-			else {
-				return null;
-			}
+			return result;
 		}
     	
     	protected void onPostExecute(ServerResponse response) {

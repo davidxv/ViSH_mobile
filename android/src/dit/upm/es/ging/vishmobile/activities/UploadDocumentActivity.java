@@ -79,7 +79,7 @@ public class UploadDocumentActivity extends Activity {
     	
     	protected void onPreExecute() {
     		// show dialog information
-    		this.progressDialog = ProgressDialog.show(UploadDocumentActivity.this, getString(R.string.loading), getString(R.string.loading));
+    		this.progressDialog = ProgressDialog.show(UploadDocumentActivity.this, getString(R.string.uploading), getString(R.string.uploading));
     	}
     	
     	protected ServerResponse doInBackground(String... params) {
@@ -90,7 +90,7 @@ public class UploadDocumentActivity extends Activity {
     	protected void onPostExecute(ServerResponse response) {
     		this.progressDialog.dismiss();
     		
-    		if((response!=null)&&(response.getResponseCode() == HttpURLConnection.HTTP_OK)) {
+    		if((response!=null)&&(response.getResponseCode() == HttpURLConnection.HTTP_CREATED)) {
     			// the document has been successfully uploaded
     			Intent i = new Intent(UploadDocumentActivity.this, MainActivity.class);
     			startActivity(i);
