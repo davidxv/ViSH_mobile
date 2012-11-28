@@ -61,7 +61,7 @@ public class CameraFileManager {
 	     // Create a media file name
 	     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 	     File mediaFile;
-	     if (type == MEDIA_TYPE_IMAGE){
+	     if (type == MEDIA_TYPE_IMAGE) {
 	         mediaFile = new File(mediaStorageDir.getPath() + File.separator +
 	         "IMG_"+ timeStamp + ".jpg");
 	     } else if(type == MEDIA_TYPE_VIDEO) {

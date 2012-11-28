@@ -26,14 +26,15 @@
     
     <!-- MAIN -->
     <string name="main_instructions">If you want to upload a media resource to ViSH simply take a new photo/video or select one from your gallery.</string>
-    <string name="capture_image">Capture image</string>
-    <string name="capture_video">Capture video</string>
-    <string name="gallery">Select from gallery</string>
+    <string name="capture_image">Image</string>
+    <string name="capture_video">Video</string>
+    <string name="gallery">Gallery</string>
     <string name="msg_logout">Logout successful</string>
+    <string name="msg_select">Select image or video</string>
     
     
     <!-- UPLOAD DOCUMENT -->
-    <string name="upload_document_instructions">Please, fill in the details related to the document you want to upload.</string>
+    <string name="upload_document_instructions">Please, fill in the details related to the document you want to upload:</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="tags">Tags</string>

@@ -3,6 +3,7 @@
  */
 package dit.upm.es.ging.vishmobile.activities;
 
+import java.io.File;
 import java.net.HttpURLConnection;
 
 import dit.upm.es.ging.vishmobile.R;
@@ -14,6 +15,7 @@ import dit.upm.es.ging.vishmobile.utils.UIutils;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * @author Daniel Gallego Vico
@@ -38,8 +39,7 @@ public class MainActivity extends Activity {
 	private final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
 	
 	// Codes for gallery picking actions
-	private final int PICK_IMAGE_CODE = 10;
-	private final int PICK_VIDEO_CODE = 20;
+	private final int PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE = 300;
 	
 	
 	@Override
@@ -89,12 +89,12 @@ public class MainActivity extends Activity {
         fromGallery.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO pick a image/video from the gallery
+				// pick a image/video from the gallery
 				Intent intent = new Intent();
-				intent.setType("image/*");
+				intent.setType("image/* video/*");
+				// ACTION_PICK for using only the native gallery or ACTION_GET_CONTENT for every media app
 				intent.setAction(Intent.ACTION_GET_CONTENT);
-				startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_CODE);
-				// TODO: http://stackoverflow.com/questions/2507898/how-to-pick-an-image-from-gallery-sd-card-for-my-app-in-android
+				startActivityForResult(Intent.createChooser(intent,getString(R.string.msg_select)), PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE);
 			}
 		}); 
         
@@ -122,52 +122,81 @@ public class MainActivity extends Activity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
 	 
-	 @Override
-	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		 // response for images
-	     if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-	         if (resultCode == RESULT_OK) {
-	        	 Uri fileUri = Model.getFileUri();
-	             // Image captured and saved to fileUri specified in the Intent
-	        	 // data.getData() is null, because the file path has been specified in the MediaStore.EXTRA_OUTPUT option.
-	        	 if(fileUri != null){
-	        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image captured and saved to " + fileUri.toString());
-	        	 } else {
-	        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","file URI is null");
-	        	 }
-	        	 // check credentials to do login if necessary 
-	        	 new CheckCredentialsTask().execute();
-	        	 
-	         } else if (resultCode == RESULT_CANCELED) {
-	             // User cancelled the image capture
-	        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","User cancelled the image capture");
-	         } else {
-	             // Image capture failed, advise user
-	        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image capture failed");
-	         }
-	     }
-	     // response for videos
-	     if (requestCode == CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE) {
-	         if (resultCode == RESULT_OK) {
-	        	 Uri fileUri = Model.getFileUri();
-	             // Video captured and saved to fileUri specified in the Intent
-	        	 if(fileUri != null){
-	        		 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","Video captured and saved to " + fileUri.toString());
-	        	 } else {
-	        		 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","file URI is null");
-	        	 }
-	        	 // check credentials to do login if necessary 
-	        	 new CheckCredentialsTask().execute();
-	        	 
-	         } else if (resultCode == RESULT_CANCELED) {
-	             // User cancelled the video capture
-	        	 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","User cancelled the video capture");
-	         } else {
-	             // Video capture failed, advise user
-	        	 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","Video capture failed");
-	         }
-	     }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			// response for images
+			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+				if (resultCode == RESULT_OK) {
+		        	 Uri fileUri = Model.getFileUri();
+		             // Image captured and saved to fileUri specified in the Intent
+		        	 // data.getData() is null, because the file path has been specified in the MediaStore.EXTRA_OUTPUT option.
+		        	 if(fileUri != null){
+		        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image captured and saved to " + fileUri.toString());
+		        	 } else {
+		        		 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","file URI is null");
+		        	 }
+		        	 // check credentials to do login if necessary 
+		        	 new CheckCredentialsTask().execute();
+		        	 
+		         } else if (resultCode == RESULT_CANCELED) {
+		             // User cancelled the image capture
+		        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","User cancelled the image capture");
+		         } else {
+		             // Image capture failed, advise user
+		        	 Log.d("CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE","Image capture failed");
+		         }
+				break;
+			// response for videos
+			case CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE:
+				if (resultCode == RESULT_OK) {
+		        	 Uri fileUri = Model.getFileUri();
+		             // Video captured and saved to fileUri specified in the Intent
+		        	 if(fileUri != null){
+		        		 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","Video captured and saved to " + fileUri.toString());
+		        	 } else {
+		        		 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","file URI is null");
+		        	 }
+		        	 // check credentials to do login if necessary 
+		        	 new CheckCredentialsTask().execute();
+		        	 
+		         } else if (resultCode == RESULT_CANCELED) {
+		             // User cancelled the video capture
+		        	 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","User cancelled the video capture");
+		         } else {
+		             // Video capture failed, advise user
+		        	 Log.d("CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE","Video capture failed");
+		         }
+				break;
+			// response for picking document from gallery
+			case PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE:
+				if(resultCode == RESULT_OK){
+					// extract the file uri
+		            Uri selectedDocument = data.getData();
+		            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+		            Cursor cursor = getContentResolver().query(selectedDocument, filePathColumn, null, null, null);
+		            cursor.moveToFirst();
+		            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+		            String filePath = cursor.getString(columnIndex);
+		            cursor.close();
+		            // save the file uri in the model
+		            Model.setFileUri(Uri.fromFile(new File(filePath)));
+		            
+		        } else if (resultCode == RESULT_CANCELED) {
+		             // User cancelled the picking action
+		        	 Log.d("PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE", "User cancelled the picking action");
+		         } else {
+		             // Picking action failed, advise user
+		        	 Log.d("PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE", "Pick action failed");
+		         }
+				break;
+			default:
+				break;
+		}
+		// check credentials to do login if necessary 
+    	new CheckCredentialsTask().execute();
 	 }
 	 
 	 
