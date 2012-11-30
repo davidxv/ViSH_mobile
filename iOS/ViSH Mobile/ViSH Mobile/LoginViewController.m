@@ -25,6 +25,9 @@
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = YES;
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    [self.tableView setBackgroundView:imageView];
 
 }
 
