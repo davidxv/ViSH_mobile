@@ -141,7 +141,7 @@ public class CommunicationUtils {
 	    outputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
 	    outputStream.writeBytes(lineEnd);
 	    outputStream.writeUTF(content);	
-	    outputStream.writeBytes(lineEnd);	
+	    outputStream.writeBytes(lineEnd);
 	}
 	
 	protected static void writeFileInMultipartField(DataOutputStream outputStream, File file) throws IOException{

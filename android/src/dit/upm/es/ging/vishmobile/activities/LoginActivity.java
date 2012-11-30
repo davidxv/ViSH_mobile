@@ -10,6 +10,7 @@ import org.json.JSONException;
 import dit.upm.es.ging.vishmobile.R;
 import dit.upm.es.ging.vishmobile.core.CommunicationManager;
 import dit.upm.es.ging.vishmobile.core.CommunicationUtils;
+import dit.upm.es.ging.vishmobile.core.Constants;
 import dit.upm.es.ging.vishmobile.core.Model;
 import dit.upm.es.ging.vishmobile.core.ServerResponse;
 import dit.upm.es.ging.vishmobile.utils.UIutils;
@@ -51,7 +52,6 @@ public class LoginActivity extends Activity {
         Button cancelButton = (Button)findViewById(R.id.loginCancel);
         cancelButton.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(LoginActivity.this, MainActivity.class);
 				startActivity(i);
@@ -63,7 +63,6 @@ public class LoginActivity extends Activity {
         Button okButton = (Button)findViewById(R.id.loginButton);
         okButton.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// Generate authentication token
 				String username = mUsernameText.getText().toString();
@@ -79,15 +78,17 @@ public class LoginActivity extends Activity {
         TextView signUp = (TextView)findViewById(R.id.signUp);
         signUp.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
-				// launch the ViSH web page in the browser
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://vishub-test.global.dit.upm.es/users/sign_up"));
-				startActivity(browserIntent);
+				launchVishInBrowser();
 			}
 		});
     }
     
+    
+    private void launchVishInBrowser(){
+    	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.getServerURI()+Constants.SIGN_UP_PATH));
+		startActivity(browserIntent);
+    }
     
     /**
      * Manage the login process in order to check 

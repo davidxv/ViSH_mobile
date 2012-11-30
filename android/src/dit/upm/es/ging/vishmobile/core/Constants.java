@@ -17,6 +17,7 @@ public class Constants {
 	public static final String SERVER_URI_TEST = "http://vishub-test.global.dit.upm.es/";
 	public static final String USER_INFO_PATH = "home.json";
 	public static final String DOCUMENTS_PATH = "documents.json";
+	public static final String SIGN_UP_PATH = "users/sign_up";
 	
 	public static final String FORMAT_HTML = "text/html";
 	public static final String FORMAT_JSON = "application/json";
