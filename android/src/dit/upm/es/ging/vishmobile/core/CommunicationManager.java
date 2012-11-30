@@ -277,7 +277,7 @@ public class CommunicationManager {
 	 * @return
 	 */
 	public static ServerResponse uploadTestDocument(){
-		return postRequestUploadFile(Constants.getServerURI()+Constants.DOCUMENTS_PATH, Constants.PATH_IMAGE_TEST, "Title", "Description", Constants.AUTH_TOKEN_TEST);
+		return postRequestUploadFile(Constants.getServerURI()+Constants.DOCUMENTS_PATH, Constants.PATH_IMAGE_TEST, "Title!¡", "Description", Constants.AUTH_TOKEN_TEST);
 	}
 	
 
