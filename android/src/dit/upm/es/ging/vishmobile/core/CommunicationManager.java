@@ -69,7 +69,7 @@ public class CommunicationManager {
 			// TODO Add better control of Base64 Encoding exception
 			return null;
 		} else {
-			String uri = Constants.SERVER_URI + Constants.USER_INFO_PATH;
+			String uri = Constants.getServerURI() + Constants.USER_INFO_PATH;
 			response = getRequestAuthorizationBasic(uri, authenticationToken);
 		}
 		return response;
@@ -176,7 +176,7 @@ public class CommunicationManager {
 	 * @return
 	 */
 	public static ServerResponse uploadDocument(String filePath, String title, String description) {
-		return postRequestUploadFile(Constants.SERVER_URI+Constants.DOCUMENTS_PATH, filePath, title, description, Model.getAuthenticationToken());
+		return postRequestUploadFile(Constants.getServerURI()+Constants.DOCUMENTS_PATH, filePath, title, description, Model.getAuthenticationToken());
 	}
 	
 	/**
@@ -190,6 +190,11 @@ public class CommunicationManager {
 	 */
 	private static ServerResponse postRequestUploadFile(String uri, String filePath, String title, String description, String authenticationToken) {
 		ServerResponse response = new ServerResponse();
+			
+		Log.d("postRequestUploadFile with uri",uri);
+		Log.d("postRequestUploadFile with filePath",filePath);
+		Log.d("postRequestUploadFile with title",title);
+		Log.d("postRequestUploadFile with description",description);
 		
 		HttpURLConnection connection = null;
 		DataOutputStream outputStream = null;
@@ -272,7 +277,7 @@ public class CommunicationManager {
 	 * @return
 	 */
 	public static ServerResponse uploadTestDocument(){
-		return postRequestUploadFile(Constants.SERVER_URI+Constants.DOCUMENTS_PATH, Constants.PATH_IMAGE_TEST, "Title", "Description", Constants.AUTH_TOKEN_TEST);
+		return postRequestUploadFile(Constants.getServerURI()+Constants.DOCUMENTS_PATH, Constants.PATH_IMAGE_TEST, "Title", "Description", Constants.AUTH_TOKEN_TEST);
 	}
 	
 

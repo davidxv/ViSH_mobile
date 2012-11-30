@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -109,14 +109,8 @@ public class CommunicationUtils {
 	 * @return
 	 */
 	public static boolean isErrorResponseCode(int responseCode){
-		 //TODO Apply regex to detect if responseCode starts with 4 or 5
-		if(responseCode==HttpURLConnection.HTTP_UNAUTHORIZED){
-			return true;
-		}
-		if(responseCode==HttpURLConnection.HTTP_INTERNAL_ERROR){
-			return true;
-		}
-		return false;
+		String pattern = "(4|5)[0-9][0-9]";
+		return Pattern.matches(pattern, Integer.toString(responseCode));
 	}
 
 	/**
@@ -141,12 +135,12 @@ public class CommunicationUtils {
 	}
 	
 	protected static void writeMultipartField(DataOutputStream outputStream, String header, String content) throws IOException{
-		outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
-		outputStream.writeBytes(header + lineEnd);
-		outputStream.writeBytes("Content-Type:text/plain;charset=UTF-8;");
-		outputStream.writeBytes(lineEnd);
-		outputStream.writeBytes(content);
-		outputStream.writeBytes(lineEnd);
+	    outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
+	    outputStream.writeBytes(header + lineEnd);	
+//	    outputStream.writeBytes("Content-Type:text/plain;charset=UTF-8;");
+	    outputStream.writeBytes(lineEnd);
+	    outputStream.writeBytes(content);	
+	    outputStream.writeBytes(lineEnd);	
 	}
 	
 	protected static void writeFileInMultipartField(DataOutputStream outputStream, File file) throws IOException{

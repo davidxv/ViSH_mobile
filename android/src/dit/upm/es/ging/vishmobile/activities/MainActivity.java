@@ -1,6 +1,3 @@
-/**
- * Main activity of Wishtagram
- */
 package dit.upm.es.ging.vishmobile.activities;
 
 import java.io.File;
@@ -29,7 +26,7 @@ import android.widget.Button;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class MainActivity extends Activity {
@@ -47,6 +44,8 @@ public class MainActivity extends Activity {
 		 super.onCreate(savedInstanceState);
         
         setContentView(R.layout.activity_main);
+        
+        Model.init(this);
         
         // Capture image button
         Button captureImage = (Button)findViewById(R.id.imageButton);
@@ -96,10 +95,7 @@ public class MainActivity extends Activity {
 				intent.setAction(Intent.ACTION_GET_CONTENT);
 				startActivityForResult(Intent.createChooser(intent,getString(R.string.msg_select)), PICK_DOCUMENT_FROM_GALLERY_REQUEST_CODE);
 			}
-		}); 
-        
-//	        Testing
-//	        CommunicationManager.uploadTestDocument();
+		});
 	 }
 
 	@Override

@@ -27,7 +27,7 @@ import android.content.Intent;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class LoginActivity extends Activity {
