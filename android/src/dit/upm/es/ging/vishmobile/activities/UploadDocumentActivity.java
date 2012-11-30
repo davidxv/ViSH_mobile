@@ -21,7 +21,7 @@ import android.widget.EditText;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class UploadDocumentActivity extends Activity {
@@ -96,8 +96,7 @@ public class UploadDocumentActivity extends Activity {
     			startActivity(i);
     			UploadDocumentActivity.this.finish();
     			UIutils.showToast(UploadDocumentActivity.this, getString(R.string.msg_upload_successful));
-    		} 
-    		else {
+    		} else {
     			// the upload has failed
     			UIutils.showToast(UploadDocumentActivity.this, getString(R.string.msg_upload_fail));
     		}
