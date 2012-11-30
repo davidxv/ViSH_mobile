@@ -31,6 +31,7 @@ public class Model {
 	
 	// File URI related to the current document generated
 	private static Uri mFileUri;
+	private static String mFilePath;
 
 	/**
 	 * Initialize the data model to save user information
@@ -124,6 +125,23 @@ public class Model {
 	 */
 	public static Uri getFileUri() {
 		return mFileUri;
+	}
+	
+	/**
+	 * Setter
+	 * 
+	 * @param filePath
+	 */
+	public static void setFilePath(String filepath) {
+		Model.mFilePath = filepath;
+	}
+	
+	/**
+	 * Getter
+	 * @return String containing the file URI
+	 */
+	public static String getFilePath() {
+		return mFilePath;
 	}
 	
 }

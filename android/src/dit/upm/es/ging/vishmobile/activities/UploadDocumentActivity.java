@@ -83,7 +83,7 @@ public class UploadDocumentActivity extends Activity {
     	}
     	
     	protected ServerResponse doInBackground(String... params) {
-			ServerResponse result = CommunicationManager.uploadDocument(Model.getFileUri().getPath(), params[0], params[1]);
+			ServerResponse result = CommunicationManager.uploadDocument(Model.getFilePath(), params[0], params[1]);
 			return result;
 		}
     	
