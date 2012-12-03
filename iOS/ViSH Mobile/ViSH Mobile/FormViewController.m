@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyField;
+@property (weak, nonatomic) IBOutlet UILabel *userField;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView * actIndicator;
 
@@ -30,6 +31,11 @@
 	
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSString * email = [def stringForKey:@"email"];
+    self.userField.text = [NSString stringWithFormat:@"User: %@", email];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,6 +45,16 @@
 }
 
 - (IBAction)cancel: (id)sender {
+    
+    [self.navigationController popToViewController: self.src animated:YES];
+    
+}
+
+- (IBAction)logOut: (id)sender {
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [def setObject:nil forKey:@"email"];
+    [def setObject:nil forKey:@"password"];
     
     [self.navigationController popToViewController: self.src animated:YES];
     
@@ -96,8 +112,6 @@
     //-- post body
     
     NSMutableData *body = [NSMutableData data];
-    
-    NSLog(@"%@, %@",self.titleField.text, self.bodyField.text);
 
     // Dictionary that holds post parameters.
     NSDictionary* _params = @{
@@ -176,7 +190,9 @@
             [self.actIndicator stopAnimating];
         });
         
-        if (data != nil && code == 200) {
+        NSLog(@"%d", code);
+        
+        if (data != nil && code == 201) {
             NSLog(@"Exito");
             
             dispatch_async( dispatch_get_main_queue(), ^{
