@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FormViewController : UIViewController
+@interface FormViewController : UITableViewController
 
 @property (nonatomic, strong) NSData * fileData;
 

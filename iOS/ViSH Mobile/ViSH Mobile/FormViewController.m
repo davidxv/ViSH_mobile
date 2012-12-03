@@ -24,9 +24,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.hidesBackButton = YES;
+    [self.navigationController setNavigationBarHidden:NO];
 	
-    //UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    //[self.view setBackgroundView:imageView];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    [self.tableView setBackgroundView:imageView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,6 +44,10 @@
     
 }
 
+-(IBAction)nextTextField:(id)sender {
+    [self.bodyField becomeFirstResponder];
+}
+
 - (IBAction) hideKbd:(id)sender {
     
     [self.titleField resignFirstResponder];
@@ -49,7 +56,7 @@
 
 #define VISH_URL @"http://vishub-test.global.dit.upm.es/documents.json"
 
-- (IBAction)createPost
+- (IBAction)createPost:(id)sender
 {
     [self createPostWithBody:self.fileData];
 }
@@ -89,6 +96,8 @@
     //-- post body
     
     NSMutableData *body = [NSMutableData data];
+    
+    NSLog(@"%@, %@",self.titleField.text, self.bodyField.text);
 
     // Dictionary that holds post parameters.
     NSDictionary* _params = @{
@@ -172,8 +181,8 @@
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Subida terminada"
-                                       message:@"El fichero se ha subido con exito."
+                                       initWithTitle:@"Success"
+                                       message:@"The document has been successfully uploaded."
                                        delegate:self
                                        cancelButtonTitle:@"OK"
                                        otherButtonTitles:nil];
@@ -183,8 +192,8 @@
             NSLog(@"Fallo");
             dispatch_async( dispatch_get_main_queue(), ^{
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Subida fallida"
-                                       message:[NSString stringWithFormat:@"Error: %@", locSC]
+                                       initWithTitle:@"Error"
+                                       message:@"The upload has failed! Please try again."
                                        delegate:self
                                        cancelButtonTitle:@"OK"
                                        otherButtonTitles:nil];
@@ -202,7 +211,7 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self.navigationController popViewControllerAnimated:YES];
+     [self.navigationController popToViewController: self.src animated:YES];
 }
 
 @end

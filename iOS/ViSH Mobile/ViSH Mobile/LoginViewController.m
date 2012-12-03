@@ -25,6 +25,7 @@
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = YES;
+    [self.navigationController setNavigationBarHidden:NO];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
@@ -70,8 +71,8 @@
          [self performSegueWithIdentifier:@"Show Form" sender:self];
     } else {
         UIAlertView * alert = [[UIAlertView alloc]
-                               initWithTitle:@"Error"
-                               message:@"Wrong credentials"
+                               initWithTitle:@"Bad credentials"
+                               message:@"Your username or password are incorrect. Please, try again."
                                delegate:self
                                cancelButtonTitle:@"OK"
                                otherButtonTitles:nil];
