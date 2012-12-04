@@ -6,6 +6,7 @@ package dit.upm.es.ging.vishmobile.camera;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import android.net.Uri;
 import android.os.Environment;
@@ -45,8 +46,6 @@ public class CameraFileManager {
 	     // To be safe, you should check that the SDCard is mounted
 	     // using Environment.getExternalStorageState() before doing this.
 		 
-		 File f = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-		 
 	     File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
 	               Environment.DIRECTORY_DCIM), CAMERA_DIRECTORY);
 	     // This location works best if you want the created images to be shared
@@ -61,7 +60,7 @@ public class CameraFileManager {
 	     }
 
 	     // Create a media file name
-	     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+	     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
 	     File mediaFile;
 	     if (type == MEDIA_TYPE_IMAGE) {
 	         mediaFile = new File(mediaStorageDir.getPath() + File.separator +

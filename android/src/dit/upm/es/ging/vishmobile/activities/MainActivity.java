@@ -1,15 +1,10 @@
 package dit.upm.es.ging.vishmobile.activities;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -214,26 +209,26 @@ public class MainActivity extends Activity {
 	 * Save the video returned by a videoIntent to a specific filePath
 	 * Currently not used
 	 */
-	private void saveVideoToFile(Intent videoIntent,String filePath){
-		   FileInputStream fis = null;
-		   FileOutputStream fos = null;
-		   File mCurrentVideoFile = null;
-		   try {
-				mCurrentVideoFile = new File(filePath);
-				AssetFileDescriptor videoAsset = getContentResolver().openAssetFileDescriptor(videoIntent.getData(), "r");
-				fis = videoAsset.createInputStream(); 
-				fos = new FileOutputStream(mCurrentVideoFile);
-				byte[] buffer = new byte[1024];
-				int length;
-				while ((length = fis.read(buffer)) > 0) {
-				      fos.write(buffer, 0, length);
-				 }  
-				fis.close();
-				fos.close();
-		   } catch (IOException e) {
-			   	e.printStackTrace();
-		   }
-	}
+//	private void saveVideoToFile(Intent videoIntent,String filePath){
+//		   FileInputStream fis = null;
+//		   FileOutputStream fos = null;
+//		   File mCurrentVideoFile = null;
+//		   try {
+//				mCurrentVideoFile = new File(filePath);
+//				AssetFileDescriptor videoAsset = getContentResolver().openAssetFileDescriptor(videoIntent.getData(), "r");
+//				fis = videoAsset.createInputStream(); 
+//				fos = new FileOutputStream(mCurrentVideoFile);
+//				byte[] buffer = new byte[1024];
+//				int length;
+//				while ((length = fis.read(buffer)) > 0) {
+//				      fos.write(buffer, 0, length);
+//				 }  
+//				fis.close();
+//				fos.close();
+//		   } catch (IOException e) {
+//			   	e.printStackTrace();
+//		   }
+//	}
 	
 	 
 	 /**

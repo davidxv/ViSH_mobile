@@ -7,7 +7,7 @@
 	    
 	    <LinearLayout 
 	        android:layout_width="match_parent"
-	    	android:layout_height="match_parent"
+	    	android:layout_height="wrap_content"
 	    	android:orientation="vertical"
 		   	android:gravity="center_horizontal"
 		   	android:layout_gravity="center_horizontal"
@@ -21,6 +21,7 @@
 			    android:layout_height="wrap_content"
 			    android:layout_marginBottom="40dp"
 			    android:src="@drawable/logo"
+			    android:contentDescription="@drawable/logo"
 			    />
 		    
 		    <TextView 
@@ -42,6 +43,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_marginRight="20dp"
 		            android:src="@drawable/icon_photo"
+		            android:contentDescription="@drawable/icon_photo"
 		            />
 		        <Button
 			        android:id="@+id/imageButton"
@@ -62,6 +64,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_marginRight="20dp"
 		            android:src="@drawable/icon_video"
+		            android:contentDescription="@drawable/icon_video"
 		            />
 		        <Button
 			        android:id="@+id/videoButton"
@@ -82,6 +85,7 @@
 		            android:layout_height="wrap_content"
 		            android:layout_marginRight="20dp"
 		            android:src="@drawable/icon_gallery"
+		            android:contentDescription="@drawable/icon_gallery"
 		            />
 		        <Button
 			        android:id="@+id/galleryButton"

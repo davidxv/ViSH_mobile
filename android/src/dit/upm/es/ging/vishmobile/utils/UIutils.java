@@ -7,7 +7,6 @@ import dit.upm.es.ging.vishmobile.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.view.Gravity;
 import android.widget.Toast;
 
 /**

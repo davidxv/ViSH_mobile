@@ -20,7 +20,7 @@ import android.util.Log;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class CommunicationManager {
@@ -81,18 +81,6 @@ public class CommunicationManager {
 	 * 				HTTP GET REQUESTS 
 	 * ======================================== 
 	 */
-	
-	
-	/**
-	 * HTTP GET request
-	 * *****************
-	 * 
-	 * @param uri
-	 * @return
-	 */
-	private ServerResponse getRequest(String uri) {
-		return this.getRequestAuthorizationBasic(uri, Model.getAuthenticationToken());
-	}
 	
 	/**
 	 * HTTP GET request (Authorization: Basic)
