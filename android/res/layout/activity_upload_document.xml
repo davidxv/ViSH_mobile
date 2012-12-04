@@ -35,6 +35,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="20dp"
 			android:hint="@string/title"
+			android:inputType="text"
+			android:imeOptions="actionNext"
 	        />
 	
 	    <EditText 
@@ -43,6 +45,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="20dp"
 			android:hint="@string/description"
+			android:inputType="text"
+			android:imeOptions="actionDone"
 	        />
 	    
 	<!--     <EditText  -->

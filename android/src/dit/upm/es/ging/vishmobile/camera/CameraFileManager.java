@@ -22,7 +22,7 @@ public class CameraFileManager {
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	
 	// Directory for storing files
-	public static final String CAMERA_DIRECTORY = "VishPictures";
+	public static final String CAMERA_DIRECTORY = "Vish";
 	
 	/**
 	  * Create a file Uri for saving an image or video
@@ -44,9 +44,11 @@ public class CameraFileManager {
 	 public static File getOutputMediaFile(int type) {
 	     // To be safe, you should check that the SDCard is mounted
 	     // using Environment.getExternalStorageState() before doing this.
-
+		 
+		 File f = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+		 
 	     File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-	               Environment.DIRECTORY_PICTURES), CAMERA_DIRECTORY);
+	               Environment.DIRECTORY_DCIM), CAMERA_DIRECTORY);
 	     // This location works best if you want the created images to be shared
 	     // between applications and persist after your app has been uninstalled.
 

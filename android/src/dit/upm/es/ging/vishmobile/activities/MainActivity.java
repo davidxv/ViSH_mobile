@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -189,6 +190,8 @@ public class MainActivity extends Activity {
 			default:
 				break;
 		}
+		// refresh the gallery to include the new document created
+		sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
 	 }
 	 
 	/*
@@ -246,7 +249,7 @@ public class MainActivity extends Activity {
     	
     	protected void onPreExecute() {
     		// show dialog information
-    		this.progressDialog = ProgressDialog.show(MainActivity.this, getString(R.string.uploading), getString(R.string.uploading));
+    		this.progressDialog = ProgressDialog.show(MainActivity.this, getString(R.string.loading), getString(R.string.loading));
     	}
     	
     	protected ServerResponse doInBackground(String... params) {

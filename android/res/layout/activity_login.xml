@@ -35,6 +35,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="20dp"
 			android:hint="@string/login"
+			android:inputType="textEmailAddress"
+			android:imeOptions="actionNext"
 	        />
 	
 	    <EditText 
@@ -43,7 +45,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="20dp"
 			android:hint="@string/password"
-			android:password="true"
+			android:inputType="textPassword"
+			android:imeOptions="actionDone"
 	        />
 	    
 	    <LinearLayout 

@@ -12,6 +12,7 @@
     
     
     <!-- GENERAL MESSAGES -->
+    <string name="loading">Loading&#8230;</string>
     <string name="uploading">Uploading&#8230;</string>
     <string name="login_error_title">Bad credentials</string>
     <string name="login_error_text">Your username or password are incorrect. Please, try again.</string>
