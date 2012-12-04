@@ -25,11 +25,13 @@
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = YES;
-    [self.navigationController setNavigationBarHidden:NO];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
+}
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +50,20 @@
         
     }
 }
+
+-(IBAction)editingTextField:(id)sender {
+
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+
+}
+
+-(IBAction)endEditingTextField:(id)sender {
+
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    
+}
+
+
 
 -(IBAction)nextTextField:(id)sender {
     [self.password becomeFirstResponder];

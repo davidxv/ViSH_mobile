@@ -32,9 +32,15 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
     
-    [self.navigationController setNavigationBarHidden:YES];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     
 }
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -80,8 +86,6 @@
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
-    
-    imagePicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
     [self presentViewController:imagePicker
                        animated:YES
@@ -145,6 +149,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    
+    UIAlertView * alert = [[UIAlertView alloc]
+                           initWithTitle:@"Loging In"
+                           message:@"Please wait..."
+                           delegate:self
+                           cancelButtonTitle:nil
+                           otherButtonTitles:nil];
+    [alert show];
 
     if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.movie"]) {
         NSURL * url = [info objectForKey:UIImagePickerControllerMediaURL];
@@ -163,13 +175,15 @@
         NSLog(@"Error in info data from UIImagePickerController");
     }
     
+    BOOL auth = [StartViewController authenticate];
+    
+    [alert dismissWithClickedButtonIndex:-1 animated:YES];
+    
     [self dismissViewControllerAnimated:NO completion:NULL];
     
-    if (![StartViewController authenticate]) {
-        
+    if (!auth) {
         [self performSegueWithIdentifier:@"Show Login" sender:self];
     } else {
-    
         [self performSegueWithIdentifier:@"Show Form" sender:self];
     }
 }

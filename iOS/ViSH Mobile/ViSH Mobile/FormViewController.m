@@ -10,7 +10,7 @@
 
 #import "NSData+Base64.h"
 
-@interface FormViewController () <UIAlertViewDelegate>
+@interface FormViewController () <UIAlertViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyField;
@@ -27,7 +27,6 @@
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = YES;
-    [self.navigationController setNavigationBarHidden:NO];
 	
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
@@ -36,6 +35,12 @@
     NSString * email = [def stringForKey:@"email"];
     self.userField.text = [NSString stringWithFormat:@"User: %@", email];
     
+    self.bodyField.delegate = self;
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +67,35 @@
 
 -(IBAction)nextTextField:(id)sender {
     [self.bodyField becomeFirstResponder];
+}
+
+-(IBAction)editingTextField:(id)sender {
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+}
+
+-(IBAction)endEditingTextField:(id)sender {
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+-(void) textViewDidBeginEditing:(UITextView *)textView  {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+-(void) textViewDidEndEditing:(UITextView *)textView {
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (IBAction) hideKbd:(id)sender {
