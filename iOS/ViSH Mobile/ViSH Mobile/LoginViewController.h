@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 UPM. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface LoginViewController : UITableViewController
 
 @property (nonatomic, strong) NSData * fileData;
 
-@property (nonatomic, strong) UIViewController * src;
++ (void) authenticate:(void(^)(BOOL ok))completion;
+
++ (void) logout;
 
 @end

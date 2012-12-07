@@ -7,23 +7,26 @@
 //
 
 #import "StartViewController.h"
-
 #import "FormViewController.h"
-#import "LoginViewController.h"
-#import "NSData+Base64.h"
+#import "WebSiteViewController.h"
 
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface StartViewController ()
-<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-{
-    NSData * currentFile;
-}
+<UINavigationControllerDelegate,UIImagePickerControllerDelegate,
+UIPopoverControllerDelegate>
+
+@property (nonatomic,strong) NSData*   selectedData;
+@property (nonatomic,strong) NSString* selectedFilename;
+@property (nonatomic,strong) NSString* selectedContentType;
+
+@property (nonatomic, strong) UIImagePickerController* mediaPicker;
+
+@property (nonatomic, strong) UIPopoverController* mediaPickerPopover;
 
 @end
 
 @implementation StartViewController
-
-#define AUTH_URL @"http://vishub-test.global.dit.upm.es/home.json"
 
 - (void)viewDidLoad
 {
@@ -31,16 +34,7 @@
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
-    
-    self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
 }
-
--(void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -48,152 +42,197 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Table View Delegate
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([segue.identifier isEqualToString:@"Show Form"]) {
-      
-        FormViewController * fvc = (FormViewController*) segue.destinationViewController;
-        fvc.src = self;
-        fvc.fileData = currentFile;
-        
-    } else if ([segue.identifier isEqualToString:@"Show Login"]) {
-        
-        LoginViewController * lvc = (LoginViewController*) segue.destinationViewController;
-        lvc.src = self;
-        lvc.fileData = currentFile;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    switch (indexPath.section) {
+        case 0:
+        {
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+            [self showCameraPicker:cell];
+            break;
+        }
+
+        case 1:
+        {
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+            [self showGalleryPicker:cell];
+            break;
+        }
+
+        case 2:
+        {
+            [self goVishHome];
+            break;
+        }
+
+        default:
+            break;
     }
 }
 
--(IBAction)goCamera:(id)sender {
+
+
+#pragma mark - Actions: Show Pickers, Show Web
+
+- (IBAction) showCameraPicker:(UIView*)sender
+{
+    // Checking if source type is available:
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        return;
+    }
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+    self.mediaPicker = [[UIImagePickerController alloc] init];
+    self.mediaPicker.delegate = self;
+    self.mediaPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.mediaPicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+    self.mediaPicker.allowsEditing = NO;
+    self.mediaPicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
-    imagePicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
     
-    [self presentViewController:imagePicker
+    [self presentViewController:self.mediaPicker
                        animated:YES
                      completion:nil];
     
 }
 
--(IBAction)goGallery:(id)sender {
+- (IBAction) showGalleryPicker:(UIView*)sender
+{
+     // Checking if source type is available:
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        return;
+    }
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
+    self.mediaPicker = [[UIImagePickerController alloc] init];
+    self.mediaPicker.delegate = self;
+    self.mediaPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    self.mediaPicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    self.mediaPicker.allowsEditing = NO;
+    self.mediaPicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
     
-    [self presentViewController:imagePicker
-                       animated:YES
-                     completion:nil];
-}
-
-+ (BOOL) authenticate {
-    
-    //-- create request
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    [request setHTTPShouldHandleCookies:NO];
-    [request setTimeoutInterval:100];
-    [request setHTTPMethod:@"POST"];
-    
-    //-- HTTP header: Basic authentication
-    
-    // Get authentication data from User Defaults:
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSString * email = [def stringForKey:@"email"];
-    NSString * password = [def stringForKey:@"password"];
-    
-    // set the HTTP header:
-    NSString *user_password = [NSString stringWithFormat:@"%@:%@", email, password];
-    NSData * user_password_data = [user_password dataUsingEncoding:NSUTF8StringEncoding];
-    NSString * u_p_d_base64 = [user_password_data base64EncodedString];
-    NSString *basic_auth_value = [NSString stringWithFormat:@"Basic %@", u_p_d_base64];
-    [request setValue:basic_auth_value forHTTPHeaderField:@"Authorization"];
-
-    //-- the URL
-    
-    NSURL* requestURL = [NSURL URLWithString:AUTH_URL];
-    [request setURL:requestURL];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-
-    // Realizar la petición
-    NSHTTPURLResponse * response = nil;
-    NSError * error = nil;
-    NSData * data = [NSURLConnection sendSynchronousRequest:request
-                                          returningResponse:&response
-                                                      error:&error];
-
-    NSInteger code = [response statusCode];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-    if (data != nil && code == 200) {
-        NSLog(@"Auth success");
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        return YES;
+        self.mediaPickerPopover = [[UIPopoverController alloc]
+                    initWithContentViewController:self.mediaPicker];
+        
+        self.mediaPickerPopover.delegate = self;
+        
+        [self.mediaPickerPopover presentPopoverFromRect:sender.frame
+                                  inView:self.view
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
     } else {
-        NSLog(@"Auth fail");
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        return NO;
+        [self presentViewController:self.mediaPicker
+                           animated:YES
+                         completion:nil];
     }
-
 }
+
+
+- (IBAction) goVishHome
+{
+    UINavigationController *nc = [self.splitViewController.viewControllers lastObject];
+    WebSiteViewController* wsvc = (id) nc.topViewController;
+    [wsvc goHome];
+}
+
 
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    NSLog(@"Selected media type = %@", [info objectForKey:UIImagePickerControllerMediaType]);
     
-    UIAlertView * alert = [[UIAlertView alloc]
-                           initWithTitle:@"Loging In"
-                           message:@"Please wait..."
-                           delegate:self
-                           cancelButtonTitle:nil
-                           otherButtonTitles:nil];
-    [alert show];
-
-    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.movie"]) {
+    
+    if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString*)kUTTypeMovie]) {
         NSURL * url = [info objectForKey:UIImagePickerControllerMediaURL];
-        currentFile = [NSData dataWithContentsOfURL: url];
-        UISaveVideoAtPathToSavedPhotosAlbum([url path], nil, nil, nil);
-        NSLog(@"Selected media type Video %@", url);
-    } else if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:@"public.image"]) {
-        UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        currentFile = UIImageJPEGRepresentation(image, 1);
-        if ([info objectForKey:UIImagePickerControllerReferenceURL] == nil) {
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+        
+        NSLog(@"Selected media URL = %@", url);
+        
+        self.selectedData = [NSData dataWithContentsOfURL: url];
+        self.selectedFilename = @"movie.mov";
+        self.selectedContentType = @"video/quicktime";
+        
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            UISaveVideoAtPathToSavedPhotosAlbum([url path], nil, nil, nil);
         }
         
-        NSLog(@"Selected media type Image %@", image);
+    } else if ([[info objectForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString*)kUTTypeImage]) {
+        
+        NSLog(@"Selected media image.");
+        UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        
+        self.selectedData = UIImageJPEGRepresentation(image, 1);
+        self.selectedFilename = @"image.jpg";
+        self.selectedContentType = @"image/jpg";
+        
+        if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+            if ([info objectForKey:UIImagePickerControllerReferenceURL] == nil) {
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+            }
+        }
+        
     } else {
         NSLog(@"Error in info data from UIImagePickerController");
+        
+        [self dismissViewControllerAnimated:NO completion:NULL];
+        return;
     }
     
-    BOOL auth = [StartViewController authenticate];
+    self.mediaPicker = nil;
     
-    [alert dismissWithClickedButtonIndex:-1 animated:YES];
-    
-    [self dismissViewControllerAnimated:NO completion:NULL];
-    
-    if (!auth) {
-        [self performSegueWithIdentifier:@"Show Login" sender:self];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        if (self.mediaPickerPopover) {
+            [self.mediaPickerPopover dismissPopoverAnimated:YES];
+            self.mediaPickerPopover = nil;
+            
+            [self performSegueWithIdentifier:@"Show Form" sender:self];
+        } else {
+            
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
+            
+            [self dismissViewControllerAnimated:YES
+                                 completion:^{
+                                     [self performSegueWithIdentifier:@"Show Form" sender:self];
+                                 }];
+        }
     } else {
-        [self performSegueWithIdentifier:@"Show Form" sender:self];
+        [self dismissViewControllerAnimated:YES
+                                 completion:^{
+                                     [self performSegueWithIdentifier:@"Show Form" sender:self];
+                                 }];
     }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
+#pragma mark - Segues
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Show Form"]) {
+        
+        FormViewController * fvc = (FormViewController*) segue.destinationViewController;
+        fvc.fileData = self.selectedData;
+        fvc.contentType = self.selectedContentType;
+        fvc.filename = self.selectedFilename;
+    }
+}
+
+- (IBAction) unwindHome:(UIStoryboardSegue*)segue
+{
+    NSLog(@"START:Recibida solicitud de cancelacion: %@",segue.identifier);
+}
 
 @end

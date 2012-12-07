@@ -7,16 +7,27 @@
 //
 
 #import "FormViewController.h"
-
+#import "LoginViewController.h"
 #import "NSData+Base64.h"
+
+#import "Constants.h"
+
+
 
 @interface FormViewController () <UIAlertViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextView *bodyField;
-@property (weak, nonatomic) IBOutlet UILabel *userField;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *uploadButton;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView * actIndicator;
+
+
 
 @end
 
@@ -31,16 +42,29 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     [self.tableView setBackgroundView:imageView];
     
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSString * email = [def stringForKey:@"email"];
-    self.userField.text = [NSString stringWithFormat:@"User: %@", email];
-    
     self.bodyField.delegate = self;
-    
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
+    //-- Authenticate
+    [self setWaitingConnectionState:YES];
+    
+    [LoginViewController authenticate:^(BOOL auth) {
+        [self setWaitingConnectionState:NO];
+        
+        if (!auth) {
+            [self performSegueWithIdentifier:@"Show Login" sender:self];
+        }
+    }];
+    
+    //--
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSString * email = [def stringForKey:@"email"];
+    self.emailLabel.text = email ? email : @"No Logged";
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,43 +73,53 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancel: (id)sender {
+- (void) setWaitingConnectionState:(BOOL)waiting
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:waiting];
+
+    if (waiting) {
+        [self.actIndicator startAnimating];
+    } else {
+        [self.actIndicator stopAnimating];
+    }
     
-    [self.navigationController popToViewController: self.src animated:YES];
-    
+    self.cancelButton.enabled = !waiting;
+    self.uploadButton.enabled = !waiting;
+    self.logoutButton.enabled = !waiting;
 }
 
-- (IBAction)logOut: (id)sender {
-    
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    [def setObject:nil forKey:@"email"];
-    [def setObject:nil forKey:@"password"];
-    
-    [self.navigationController popToViewController: self.src animated:YES];
-    
-}
 
 -(IBAction)nextTextField:(id)sender {
+
     [self.bodyField becomeFirstResponder];
 }
 
 -(IBAction)editingTextField:(id)sender {
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
     
 }
 
 -(IBAction)endEditingTextField:(id)sender {
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    return;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 -(void) textViewDidBeginEditing:(UITextView *)textView  {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
 }
 
 -(void) textViewDidEndEditing:(UITextView *)textView {
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    return;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -102,16 +136,23 @@
     
     [self.titleField resignFirstResponder];
     [self.bodyField resignFirstResponder];
+    return;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:YES];
 }
 
-#define VISH_URL @"http://vishub-test.global.dit.upm.es/documents.json"
 
 - (IBAction)createPost:(id)sender
 {
-    [self createPostWithBody:self.fileData];
+    [self createPostWithBody:self.fileData
+                    filename:self.filename
+                 contentType:self.contentType];
 }
 
-- (void) createPostWithBody: (NSData*) file {
+- (void) createPostWithBody:(NSData*)file
+                   filename:(NSString*)filename
+                contentType:(NSString*)contentType {
     
     //-- create request
     
@@ -138,10 +179,10 @@
     //-- HTTP header: Content-Type is form multipart  
     
     // the boundary string : a random string, that will not repeat in post data, to separate post data fields.
-    NSString *boundary = @"----------V2ymHFg03ehbqgZCaKO6jy";
+    NSString *boundary = @"----------AQWSFH0g3hbqegZKa6zdzd";
     
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    [request     setValue: [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary]
+       forHTTPHeaderField: @"Content-Type"];
     
     //-- post body
     
@@ -172,9 +213,9 @@
     if (file != nil) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary]
                           dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"movie.mov\"\r\n", fileParamName]
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", fileParamName, filename]
                           dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type: video/quicktime\r\n\r\n"
+        [body appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n",contentType]
                           dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:file];
         [body appendData:[[NSString stringWithFormat:@"\r\n"]
@@ -196,12 +237,10 @@
     
     //-- the URL
 
-    NSURL* requestURL = [NSURL URLWithString:VISH_URL];
+    NSURL* requestURL = [NSURL URLWithString:VISH_URL_DOCS];
     [request setURL:requestURL];
     
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    [self.actIndicator startAnimating];
+    [self setWaitingConnectionState:YES];
     
     [self hideKbd:self];
     
@@ -220,8 +259,7 @@
         NSLog(@"HTTP Response status code = %d (%@)", code, locSC);
         
         dispatch_async( dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-            [self.actIndicator stopAnimating];
+            [self setWaitingConnectionState:NO];
         });
         
         NSLog(@"%d", code);
@@ -245,8 +283,8 @@
                                        initWithTitle:@"Error"
                                        message:@"The upload has failed! Please try again."
                                        delegate:self
-                                       cancelButtonTitle:@"OK"
-                                       otherButtonTitles:nil];
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"Retry",nil];
                 
                 [alert show];
             });
@@ -261,7 +299,33 @@
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-     [self.navigationController popToViewController: self.src animated:YES];
+    if (buttonIndex == 0) {
+        [self performSegueWithIdentifier:@"Upload Done" sender:self];
+    }
+}
+
+#pragma mark - Segues
+
+- (IBAction) loggedIn:(UIStoryboardSegue*)segue
+{
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+      if ([segue.identifier isEqualToString:@"Do Log Out"]) {
+          
+          [LoginViewController logout];
+    
+      } else if ([segue.identifier isEqualToString:@"Upload Done"]) {
+
+      
+      } else if ([segue.identifier isEqualToString:@"Show Login"]) {
+
+      } else if ([segue.identifier isEqualToString:@"Show Login"]) {
+          
+      }
+
 }
 
 @end

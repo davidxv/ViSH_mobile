@@ -6,12 +6,10 @@
 //  Copyright (c) 2012 UPM. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface FormViewController : UITableViewController
 
-@property (nonatomic, strong) NSData * fileData;
-
-@property (nonatomic, strong) UIViewController * src;
+@property (nonatomic, strong) NSData*   fileData;
+@property (nonatomic, strong) NSString* filename;
+@property (nonatomic, strong) NSString* contentType;
 
 @end
