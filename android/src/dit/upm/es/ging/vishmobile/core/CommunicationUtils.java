@@ -22,7 +22,7 @@ import android.util.Base64;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class CommunicationUtils {

@@ -5,15 +5,15 @@ package dit.upm.es.ging.vishmobile.core;
 
 /**
  * @author Daniel Gallego Vico
- * @author Aldo Gordillo Méndez
+ * @author Aldo Gordillo Mendez
  *
  */
 public class Constants {
 	
 	public static final boolean VISH_LOCAL = false; //False to use VISH_TEST
-	public static final boolean VISH_PRODUCTION = false; //True to use production version
+	public static final boolean VISH_PRODUCTION = true; //True to use production version
 	
-	public static final String SERVER_URI_PRODUCTION = "http://vishub.global.dit.upm.es/";
+	public static final String SERVER_URI_PRODUCTION = "http://vishub.org/";
 	public static final String SERVER_URI_TEST = "http://vishub-test.global.dit.upm.es/";
 	public static final String USER_INFO_PATH = "home.json";
 	public static final String DOCUMENTS_PATH = "documents.json";
