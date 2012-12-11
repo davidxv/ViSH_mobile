@@ -44,7 +44,7 @@
                                                                 style:UIBarButtonItemStyleBordered
                                                                target:self.webView
                                                                action:@selector(goForward)];
-    UIBarButtonItem* home = [[UIBarButtonItem alloc] initWithTitle:@"Home"
+    UIBarButtonItem* home = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Home Button Title",@"Home")
                                                              style:UIBarButtonItemStyleBordered
                                                             target:self
                                                             action:@selector(goHome)];
@@ -88,7 +88,7 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)popoverController
 {
-    barButtonItem.title = @"Upload";
+    barButtonItem.title = NSLocalizedString(@"Upload Button Title",@"Upload");
     
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.masterPopoverController = popoverController;

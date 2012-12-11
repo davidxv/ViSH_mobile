@@ -1,0 +1,51 @@
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "5wN-Ql-MF3"; */
+"5wN-Ql-MF3.title" = "Cancelar";
+
+/* Class = "IBUILabel"; text = "email:"; ObjectID = "6yx-xQ-xlz"; */
+"6yx-xQ-xlz.text" = "email:";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "EGY-nx-mOV"; */
+"EGY-nx-mOV.title" = "Cancelar";
+
+/* Class = "IBUITextView"; text = "You need to sign in or sign up before continuing."; ObjectID = "Fmm-Hf-o2m"; */
+"Fmm-Hf-o2m.text" = "Debe ingresar antes de poder continuar.";
+
+/* Class = "IBUILabel"; text = "Password:"; ObjectID = "KU3-gt-sgY"; */
+"KU3-gt-sgY.text" = "Contraseña:";
+
+/* Class = "IBUIButton"; normalTitle = "Log out"; ObjectID = "LUg-bs-cwX"; */
+"LUg-bs-cwX.normalTitle" = "Desconectar";
+
+/* Class = "IBUILabel"; text = "email"; ObjectID = "MR8-pX-hem"; */
+"MR8-pX-hem.text" = "email";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Title"; ObjectID = "O7i-PJ-OfA"; */
+"O7i-PJ-OfA.headerTitle" = "Título";
+
+/* Class = "IBUITextView"; text = "If you want to upload a media resource to ViSH simply take a new photo/video from camera or select one from your gallery. "; ObjectID = "VmC-g6-ms3"; */
+"VmC-g6-ms3.text" = "Para subir un recurso a ViSH utilice la cámara para tomar una nueva fotografía o película, o seleccione una existente de su galería.";
+
+/* Class = "IBUINavigationItem"; title = "Root View Controller"; ObjectID = "YpP-q0-i4a"; */
+"YpP-q0-i4a.title" = "Root View Controller";
+
+/* Class = "IBUITextView"; text = "Please, fill in the details related to the document you want to upload:"; ObjectID = "cRB-Vr-pwz"; */
+"cRB-Vr-pwz.text" = "Por favor, introduzca los detalles del recurso que desea subir:";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Description"; ObjectID = "eAK-Nb-TjT"; */
+"eAK-Nb-TjT.headerTitle" = "Descripción";
+
+/* Class = "IBUIBarButtonItem"; title = "Sign In"; ObjectID = "fdu-YX-Zv4"; */
+"fdu-YX-Zv4.title" = "Ingresar";
+
+/* Class = "IBUILabel"; text = "Camera"; ObjectID = "jFq-pS-1kI"; */
+"jFq-pS-1kI.text" = "Cámara";
+
+/* Class = "IBUITextField"; placeholder = "Media title"; ObjectID = "lKQ-2K-xam"; */
+"lKQ-2K-xam.placeholder" = "Título";
+
+/* Class = "IBUILabel"; text = "Gallery"; ObjectID = "n7j-e2-JBA"; */
+"n7j-e2-JBA.text" = "Galería";
+
+/* Class = "IBUIBarButtonItem"; title = "Upload"; ObjectID = "rsk-Ts-kyv"; */
+"rsk-Ts-kyv.title" = "Subir";

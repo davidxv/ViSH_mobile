@@ -1,0 +1,51 @@
+
+/* Class = "IBUILabel"; text = "Gallery"; ObjectID = "2gO-nW-Be3"; */
+"2gO-nW-Be3.text" = "Galería";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Description"; ObjectID = "3xc-oh-fRA"; */
+"3xc-oh-fRA.headerTitle" = "Descripción";
+
+/* Class = "IBUINavigationItem"; title = "Vishub"; ObjectID = "6NN-Wd-2kh"; */
+"6NN-Wd-2kh.title" = "Vishub";
+
+/* Class = "IBUITextView"; text = "If you want to upload a media resource to ViSH simply take a new photo/video from camera or select one from your gallery. "; ObjectID = "Dql-Oa-7qa"; */
+"Dql-Oa-7qa.text" = "Para subir un recurso a ViSH utilice la cámara para tomar una nueva fotografía o película, o seleccione una existente de su galería.";
+
+/* Class = "IBUITextField"; placeholder = "Media title"; ObjectID = "LG1-sI-K6K"; */
+"LG1-sI-K6K.placeholder" = "Título";
+
+/* Class = "IBUILabel"; text = "Camera"; ObjectID = "Llf-eG-kjk"; */
+"Llf-eG-kjk.text" = "Cámara";
+
+/* Class = "IBUILabel"; text = "email"; ObjectID = "Mco-LI-6NR"; */
+"Mco-LI-6NR.text" = "email";
+
+/* Class = "IBUITextView"; text = "You need to sign in or sign up before continuing."; ObjectID = "OPu-hn-1v8"; */
+"OPu-hn-1v8.text" = "Debe ingresar antes de poder continuar.";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "QYd-Wt-TbS"; */
+"QYd-Wt-TbS.title" = "Cancelar";
+
+/* Class = "IBUITableViewSection"; headerTitle = "Title"; ObjectID = "RGO-ax-SVg"; */
+"RGO-ax-SVg.headerTitle" = "Título";
+
+/* Class = "IBUITextView"; text = "Please, fill in the details related to the document you want to upload:"; ObjectID = "Rjz-Ah-uvk"; */
+"Rjz-Ah-uvk.text" = "Por favor, introduzca los detalles del recurso que desea subir:";
+
+/* Class = "IBUIBarButtonItem"; title = "Cancel"; ObjectID = "ShM-Ln-Dvl"; */
+"ShM-Ln-Dvl.title" = "Cancelar";
+
+/* Class = "IBUILabel"; text = "email:"; ObjectID = "T8j-UK-Vbd"; */
+"T8j-UK-Vbd.text" = "email:";
+
+/* Class = "IBUILabel"; text = "Password:"; ObjectID = "TD8-KW-fTB"; */
+"TD8-KW-fTB.text" = "Contraseña:";
+
+/* Class = "IBUIBarButtonItem"; title = "Upload"; ObjectID = "fdi-jB-g5r"; */
+"fdi-jB-g5r.title" = "Subir";
+
+/* Class = "IBUIButton"; normalTitle = "Log out"; ObjectID = "nlQ-xr-F2L"; */
+"nlQ-xr-F2L.normalTitle" = "Desconectar";
+
+/* Class = "IBUIBarButtonItem"; title = "Sign In"; ObjectID = "oBL-MX-y1k"; */
+"oBL-MX-y1k.title" = "Ingresar";

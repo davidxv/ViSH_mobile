@@ -39,10 +39,24 @@
     
     self.navigationItem.hidesBackButton = YES;
 	
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    [self.tableView setBackgroundView:imageView];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background1.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    } else {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background5.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    }
     
     self.bodyField.delegate = self;
+}
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -64,7 +78,8 @@
     
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString * email = [def stringForKey:@"email"];
-    self.emailLabel.text = email ? email : @"No Logged";
+    self.emailLabel.text = email ? email: NSLocalizedString(@"No Logged",
+                                                            @"No Logged");
 }
 
 - (void)didReceiveMemoryWarning
@@ -269,10 +284,10 @@
             
             dispatch_async( dispatch_get_main_queue(), ^{
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Success"
-                                       message:@"The document has been successfully uploaded."
+                                       initWithTitle:NSLocalizedString(@"Alert Upload Success Title",@"Title")
+                                       message:NSLocalizedString(@"Alert Upload Success Message",@"Message")
                                        delegate:self
-                                       cancelButtonTitle:@"OK"
+                                       cancelButtonTitle:NSLocalizedString(@"Alert Upload Success Cancel",@"Cancel")
                                        otherButtonTitles:nil];
                 [alert show];
             });
@@ -280,11 +295,11 @@
             NSLog(@"Fallo");
             dispatch_async( dispatch_get_main_queue(), ^{
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Error"
-                                       message:@"The upload has failed! Please try again."
+                                       initWithTitle:NSLocalizedString(@"Alert Upload Error Title",@"Title")
+                                       message:NSLocalizedString(@"Alert Upload Error Message",@"Message")
                                        delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:@"Retry",nil];
+                                       cancelButtonTitle:NSLocalizedString(@"Alert Upload Error Cancel",@"Cancel")
+                                       otherButtonTitles:NSLocalizedString(@"Alert Upload Error Retry",@"Retry"),nil];
                 
                 [alert show];
             });
@@ -308,6 +323,10 @@
 
 - (IBAction) loggedIn:(UIStoryboardSegue*)segue
 {
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSString * email = [def stringForKey:@"email"];
+    self.emailLabel.text = email ? email: NSLocalizedString(@"No Logged",
+                                                            @"No Logged");
 }
 
 

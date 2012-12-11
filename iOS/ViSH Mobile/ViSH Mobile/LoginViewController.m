@@ -36,8 +36,15 @@ static BOOL authenticated = NO;
 {
     [super viewDidLoad];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    [self.tableView setBackgroundView:imageView];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background1.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    } else {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background5.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    }
     
     // Fill in the email text field.
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
@@ -145,17 +152,20 @@ static BOOL authenticated = NO;
     NSString * email = [def stringForKey:@"email"];
     NSString * password = [def stringForKey:@"password"];
     
-    NSLog(@"Saved email = \"%@\"",email);
-    NSLog(@"Saved password = \"%@\"",password);
+    // NSLog(@"Saved email = \"%@\"",email);
+    // NSLog(@"Saved password = \"%@\"",password);
     
     if ( !email || !password || [email isEqualToString:@""] || [password isEqualToString:@""]) {
         NSLog(@"Auth fail: there is no email or password.");
         
         UIAlertView * alert = [[UIAlertView alloc]
-                               initWithTitle:@"Sign In incomplete"
-                               message:@"Please, fill in email and password fields."
+                               initWithTitle:NSLocalizedString(@"Alert Sign In incomplete Title",
+                                                               @"Title")
+                               message:NSLocalizedString(@"Alert Sign In incomplete Message",
+                                                         @"Message")
                                delegate:self
-                               cancelButtonTitle:@"OK"
+                               cancelButtonTitle:NSLocalizedString(@"Alert Sign In incomplete Cancel",
+                                                                   @"Cancel")
                                otherButtonTitles:nil];
         [alert show];
         authenticated = NO;
@@ -164,8 +174,10 @@ static BOOL authenticated = NO;
     }
     
     UIAlertView * alert = [[UIAlertView alloc]
-                           initWithTitle:@"Loging In"
-                           message:@"Please wait..."
+                           initWithTitle:NSLocalizedString(@"Alert Loging In Title",
+                                                           @"Title")
+                           message:NSLocalizedString(@"Alert Loging In Message",
+                                                     @"Message")
                            delegate:self
                            cancelButtonTitle:nil
                            otherButtonTitles:nil];
@@ -217,10 +229,10 @@ static BOOL authenticated = NO;
                 NSLog(@"Connection fail. Error = %@",[error localizedDescription]);
                 
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Connection Fail"
-                                       message:@"I can not connect with the server."
+                                       initWithTitle:NSLocalizedString(@"Alert Connection Fail Title",@"Title")
+                                       message:NSLocalizedString(@"Alert Connection Fail Message",@"Message")
                                        delegate:self
-                                       cancelButtonTitle:@"OK"
+                                       cancelButtonTitle:NSLocalizedString(@"Alert Connection Fail Cancel",@"Cancel")
                                        otherButtonTitles:nil];
                 [alert show];
                 authenticated = NO;
@@ -231,10 +243,10 @@ static BOOL authenticated = NO;
                 NSLog(@"Auth fail. Code = %d. Error = %@",code,[error localizedDescription]);
                 
                 UIAlertView * alert = [[UIAlertView alloc]
-                                       initWithTitle:@"Bad credentials"
-                                       message:@"Your email or password are incorrect. Please, try again."
+                                       initWithTitle:NSLocalizedString(@"Alert Bad Credentials Title",@"Title")
+                                       message:NSLocalizedString(@"Alert Bad Credentials Message",@"Message")
                                        delegate:self
-                                       cancelButtonTitle:@"OK"
+                                       cancelButtonTitle:NSLocalizedString(@"Alert Bad Credentials Cancel",@"Cancel")
                                        otherButtonTitles:nil];
                 [alert show];
                 authenticated = NO;

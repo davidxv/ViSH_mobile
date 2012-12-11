@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DE3F9AC8165ABA77007E158D"
-               BuildableName = "Vishub.app"
+               BuildableName = "Vish.app"
                BlueprintName = "ViSH Mobile"
                ReferencedContainer = "container:ViSH Mobile.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DE3F9AC8165ABA77007E158D"
-            BuildableName = "Vishub.app"
+            BuildableName = "Vish.app"
             BlueprintName = "ViSH Mobile"
             ReferencedContainer = "container:ViSH Mobile.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DE3F9AC8165ABA77007E158D"
-            BuildableName = "Vishub.app"
+            BuildableName = "Vish.app"
             BlueprintName = "ViSH Mobile"
             ReferencedContainer = "container:ViSH Mobile.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DE3F9AC8165ABA77007E158D"
-            BuildableName = "Vishub.app"
+            BuildableName = "Vish.app"
             BlueprintName = "ViSH Mobile"
             ReferencedContainer = "container:ViSH Mobile.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Distribution"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  ViSH Mobile
+
+  Created by Santiago Pavón on 11/12/12.
+  Copyright (c) 2012 UPM. All rights reserved.
+*/
+
+//-- Start VC
+
+//-- Form VC
+
+"No Logged" = "No Logged";
+
+"Alert Upload Success Title"   = "Success";
+"Alert Upload Success Message" = "The document has been successfully uploaded.";
+"Alert Upload Success Cancel"  = "OK";
+
+"Alert Upload Error Title"   = "Error";
+"Alert Upload Error Message" = "The upload has failed! Please try again.";
+"Alert Upload Error Cancel"  = "Cancel";
+"Alert Upload Error Retry"   = "Retry";
+//-- Login VC
+
+"Alert Sign In incomplete Title"   = "Sign In incomplete";
+"Alert Sign In incomplete Message" = "Please, fill in email and password fields.";
+"Alert Sign In incomplete Cancel"  = "OK";
+
+"Alert Loging In Title"   = "Loging In";
+"Alert Loging In Message" = "Please wait...";
+
+"Alert Connection Fail Title"   = "Connection Fail";
+"Alert Connection Fail Message" = "I can not connect with the server.";
+"Alert Connection Fail Cancel"  = "OK";
+
+"Alert Bad Credentials Title"   = "Bad credentials";
+"Alert Bad Credentials Message" = "Your email or password are incorrect. Please, try again.";
+"Alert Bad Credentials Cancel"  = "OK";
+
+//-- Web Site VC
+
+"Home Button Title" = "Home";
+"Upload Button Title" = "Upload Resources";
+
+
+

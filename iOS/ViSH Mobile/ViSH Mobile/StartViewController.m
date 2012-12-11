@@ -32,10 +32,31 @@ UIPopoverControllerDelegate>
 {
     [super viewDidLoad];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    [self.tableView setBackgroundView:imageView];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background3.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    } else {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background5.png"]];
+        imageView.contentMode = UIViewContentModeTop;
+        [self.tableView setBackgroundView:imageView];
+    }
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+/*
+-(void)viewDidDisappear:(BOOL)animated {
+
+    [super viewDidDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+*/
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -55,20 +76,12 @@ UIPopoverControllerDelegate>
             [self showCameraPicker:cell];
             break;
         }
-
         case 1:
         {
             UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
             [self showGalleryPicker:cell];
             break;
         }
-
-        case 2:
-        {
-            [self goVishHome];
-            break;
-        }
-
         default:
             break;
     }
