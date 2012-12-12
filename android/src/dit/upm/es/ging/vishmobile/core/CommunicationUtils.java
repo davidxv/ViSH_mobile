@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import android.content.Context;
@@ -120,30 +121,69 @@ public class CommunicationUtils {
 	//Constants
 	protected static final String lineEnd = "\r\n";
 	protected static final String twoHyphens = "--";
+	protected static final String vishBoundary = "----VishMobileBoundary";
+	private final static char[] MULTIPART_CHARS = "-_1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 	
 	//Variables
 	private static String currentBoundary;
-		
-	protected static String generateBoundary(){
-		//TODO make me random!
-		currentBoundary = "----VishMobileBoundaryo5L8LSN7JKaL1jud";
+	
+	
+	/**
+	 * 
+	 * @return the multipart boundary
+	 */
+	protected static String generateBoundary() {
+		currentBoundary = vishBoundary + generateRandomBoundary();
 		return currentBoundary;
 	}
 	
-	protected static String getCurrentBoundary(){
+	/**
+	 * 
+	 * @return the random part of the multipart boundary
+	 */
+	protected static String generateRandomBoundary() {
+        StringBuilder buffer = new StringBuilder();
+        Random rand = new Random();
+        int count = rand.nextInt(11) + 30; // a random size from 30 to 40
+        for (int i = 0; i < count; i++) {
+        	buffer.append(MULTIPART_CHARS[rand.nextInt(MULTIPART_CHARS.length)]);
+        }
+        return buffer.toString();
+	}
+
+	/**
+	 * 
+	 * @return the current boundary used
+	 */
+	protected static String getCurrentBoundary() {
 		return currentBoundary;
 	}
 	
-	
+	/**
+	 * Write the multipart field corresponding to the form data related to the file uploaded
+	 * 
+	 * @param outputStream
+	 * @param header
+	 * @param content
+	 * @throws IOException
+	 */
 	protected static void writeMultipartField(DataOutputStream outputStream, String header, String content) throws IOException{
 	    outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
-	    outputStream.writeUTF(header + lineEnd);	
-	    outputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + lineEnd);
+	    outputStream.writeBytes(header + lineEnd);
+	    outputStream.writeBytes("Content-Type:text/plain;charset=UTF-8" + lineEnd);
 	    outputStream.writeBytes(lineEnd);
-	    outputStream.writeUTF(content);	
+	    byte [] content_bytes = content.getBytes("UTF-8");
+	    outputStream.write(content_bytes);	
 	    outputStream.writeBytes(lineEnd);
 	}
 	
+	/**
+	 * Write the multipart field corresponding to the file uploaded
+	 * 
+	 * @param outputStream
+	 * @param file
+	 * @throws IOException
+	 */
 	protected static void writeFileInMultipartField(DataOutputStream outputStream, File file) throws IOException{
 		outputStream.writeBytes(twoHyphens + currentBoundary + lineEnd);
 		outputStream.writeBytes("Content-Disposition: form-data; name=\"document[file]\"; filename=\"" + file.getName() +"\"" + lineEnd);
