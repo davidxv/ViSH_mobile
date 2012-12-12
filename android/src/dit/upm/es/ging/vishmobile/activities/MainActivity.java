@@ -20,6 +20,7 @@ import android.widget.Button;
 import dit.upm.es.ging.vishmobile.R;
 import dit.upm.es.ging.vishmobile.camera.CameraFileManager;
 import dit.upm.es.ging.vishmobile.core.CommunicationManager;
+import dit.upm.es.ging.vishmobile.core.Constants;
 import dit.upm.es.ging.vishmobile.core.Model;
 import dit.upm.es.ging.vishmobile.core.ServerResponse;
 import dit.upm.es.ging.vishmobile.utils.UIutils;
@@ -118,6 +119,10 @@ public class MainActivity extends Activity {
 	        	Model.logout(MainActivity.this);
 	        	UIutils.showToast(getApplicationContext(), getString(R.string.msg_logout));
 	            return true;
+	        case R.id.menu_visit_vish:
+	        	// launch ViSH web page in the browser
+	        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SERVER_URI_PRODUCTION));
+	        	startActivity(browserIntent);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

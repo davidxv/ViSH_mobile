@@ -101,7 +101,7 @@ public class LoginActivity extends Activity {
     	
     	protected void onPreExecute() {
     		// show dialog information
-    		this.progressDialog = ProgressDialog.show(LoginActivity.this, getString(R.string.uploading), getString(R.string.uploading));
+    		this.progressDialog = ProgressDialog.show(LoginActivity.this, getString(R.string.loading), getString(R.string.loading));
     	}
     	
     	protected ServerResponse doInBackground(String... params) {
