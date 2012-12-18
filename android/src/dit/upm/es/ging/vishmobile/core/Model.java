@@ -29,9 +29,12 @@ public class Model {
 	//Stores the user name
 	private static String mUserName;
 	
-	// File URI related to the current document generated
+	// File uri and path related to the current document generated
 	private static Uri mFileUri;
 	private static String mFilePath;
+	
+	// File orientation
+	private static String mFileOrientation;
 
 	/**
 	 * Initialize the data model to save user information
@@ -142,6 +145,24 @@ public class Model {
 	 */
 	public static String getFilePath() {
 		return mFilePath;
+	}
+	
+	/**
+	 * Setter
+	 * 
+	 * @param orientation
+	 */
+	public static void setFileOrientation(String orientation) {
+		Model.mFileOrientation = orientation;
+	}
+	
+	/**
+	 * Getter
+	 * 
+	 * @return
+	 */
+	public static String getFileOrientation() {
+		return mFileOrientation;
 	}
 	
 }

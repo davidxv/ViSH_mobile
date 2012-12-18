@@ -23,7 +23,7 @@ public class Constants {
 	public static final String FORMAT_JSON = "application/json";
 	public static final String FORMAT_UNKNOWN = "unknown";
 	
-	//Developping
+	//Developing
 	public static final String DEV_SERVER_URI = "http://138.4.4.164:3000/";
 	public static final String AUTH_TOKEN_TEST = "Basic ZGVtb0Bzb2NpYWwtc3RyZWFtLmRpdC51cG0uZXM6ZGVtb25zdHJhdGlvbg==";
 	public static final String PATH_IMAGE_TEST = "/mnt/sdcard/Pictures/VishPictures/test.jpg";
@@ -40,5 +40,9 @@ public class Constants {
 		}
 
 	}
+	
+	// File orientation
+	public static final String ORIENTATION_PORTRAIT = "portrait";
+	public static final String ORIENTATION_LANDSCAPE = "landscape";
 	
 }
