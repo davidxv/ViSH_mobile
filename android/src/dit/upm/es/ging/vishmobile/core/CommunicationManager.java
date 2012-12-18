@@ -105,8 +105,6 @@ public class CommunicationManager {
 	        // Starts the query
 	        getConnection.connect();
 	        
-//	        Log.i("GET request: ", uri);
-	        
 	        int responseCode = getConnection.getResponseCode();
 	        response.setResponseCode(responseCode);
 	        

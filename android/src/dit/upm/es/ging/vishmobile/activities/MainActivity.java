@@ -1,11 +1,13 @@
 package dit.upm.es.ging.vishmobile.activities;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import dit.upm.es.ging.vishmobile.R;
 import dit.upm.es.ging.vishmobile.camera.CameraFileManager;
 import dit.upm.es.ging.vishmobile.core.CommunicationManager;
+import dit.upm.es.ging.vishmobile.core.Constants;
 import dit.upm.es.ging.vishmobile.core.Model;
 import dit.upm.es.ging.vishmobile.core.ServerResponse;
 import dit.upm.es.ging.vishmobile.utils.UIutils;
@@ -118,6 +121,10 @@ public class MainActivity extends Activity {
 	        	Model.logout(MainActivity.this);
 	        	UIutils.showToast(getApplicationContext(), getString(R.string.msg_logout));
 	            return true;
+	        case R.id.menu_visit_vish:
+	        	// launch ViSH web page in the browser
+	        	Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.SERVER_URI_PRODUCTION));
+	        	startActivity(browserIntent);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
@@ -187,6 +194,44 @@ public class MainActivity extends Activity {
 		}
 		// refresh the gallery to include the new document created
 		sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+		
+		// get the file orientation
+		int orientation = 0;
+		try {
+			ExifInterface exif = new ExifInterface(Model.getFilePath());
+			orientation = Integer.parseInt(exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		// Save it in the model
+		switch (orientation) {
+			// landscape (0 arc degrees)
+			case ExifInterface.ORIENTATION_NORMAL:
+				Log.d("Orientation", "Normal");
+				Model.setFileOrientation(Constants.ORIENTATION_LANDSCAPE);
+				break;
+			// portrait (90 arc degrees)
+			case ExifInterface.ORIENTATION_ROTATE_90:
+				Log.d("Orientation", "90");
+				Model.setFileOrientation(Constants.ORIENTATION_PORTRAIT);
+				break;
+			// landscape (180 arc degrees)
+			case ExifInterface.ORIENTATION_ROTATE_180:
+				Log.d("Orientation", "180");
+				Model.setFileOrientation(Constants.ORIENTATION_LANDSCAPE);
+				break;
+			// portrait (270 arc degrees)
+			case ExifInterface.ORIENTATION_ROTATE_270:
+				Log.d("Orientation", "270");
+				Model.setFileOrientation(Constants.ORIENTATION_PORTRAIT);
+				break;
+			default:
+				Log.d("Orientation", orientation+"");
+				Model.setFileOrientation(Constants.ORIENTATION_PORTRAIT);
+				break;
+		}
+		
 	 }
 	 
 	/*
